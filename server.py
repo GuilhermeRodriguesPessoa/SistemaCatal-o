@@ -44,22 +44,27 @@ os.makedirs(PDF_DIR, exist_ok=True)
 os.makedirs(PDF_DIR, exist_ok=True)
 
 def carregar_dados():
-    vazio = {"clientes": [], "materiais": [], "orcamentos": [], "formas_pagamento": [], "recebimentos": [], "usuarios": [], "auditoria": []}
-    if not db:
-        return vazio
+    # Tenta ler do Firebase primeiro
+    if db:
+        try:
+            doc = db.collection('sistema').document('dados_gerais').get()
+            if doc.exists:
+                dados = doc.to_dict()
+                # Se o documento tiver dados, usa eles
+                if dados.get("clientes") or dados.get("orcamentos"):
+                    print("✅ Dados carregados do Firebase!")
+                    return dados
+        except Exception as e:
+            print(f"⚠️ Erro ao ler do Firebase: {e}. Usando arquivo local.")
+
+    # Se o Firebase estiver vazio ou der erro, usa o arquivo local
+    print("📂 Carregando dados do arquivo local dados_marmoraria.json...")
     try:
-        print("📥 Lendo dados do Firestore...", flush=True)
-        doc = db.collection('sistema').document('dados_gerais').get(timeout=15)
-        print("📥 Leitura concluída.", flush=True)
-        if doc.exists:
-            dados = doc.to_dict()
-            for chave in vazio:
-                dados.setdefault(chave, [])
-            return dados
-        return vazio
+        with open('dados_marmoraria.json', 'r', encoding='utf-8') as arquivo:
+            return json.load(arquivo)
     except Exception as e:
-        print(f"❌ Erro ao carregar do Firebase: {e}", flush=True)
-        return vazio
+        print(f"❌ Erro ao ler arquivo local: {e}")
+        return {"clientes": [], "materiais": [], "orcamentos": [], "formas_pagamento": [], "recebimentos": [], "usuarios": [], "auditoria": []}
 
 def salvar_dados():
     if not db:
