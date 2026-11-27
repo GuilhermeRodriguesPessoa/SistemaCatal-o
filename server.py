@@ -51,18 +51,25 @@ PDF_DIR = os.path.join(BASE_DIR, "PDF_Orcamentos")
 LOGO_FILE = os.path.join(BASE_DIR, "logo.png")
 os.makedirs(PDF_DIR, exist_ok=True)
 
+os.makedirs(PDF_DIR, exist_ok=True)
+
 def carregar_dados():
+    vazio = {"clientes": [], "materiais": [], "orcamentos": [], "formas_pagamento": [], "recebimentos": [], "usuarios": [], "auditoria": []}
     if not db:
-        return {"clientes": [], "materiais": [], "orcamentos": [], "formas_pagamento": [], "recebimentos": [], "usuarios": [], "auditoria": []}
+        return vazio
     try:
-        doc = db.collection('sistema').document('dados_gerais').get()
+        print("📥 Lendo dados do Firestore...", flush=True)
+        doc = db.collection('sistema').document('dados_gerais').get(timeout=15)
+        print("📥 Leitura concluída.", flush=True)
         if doc.exists:
-            return doc.to_dict()
-        else:
-            return {"clientes": [], "materiais": [], "orcamentos": [], "formas_pagamento": [], "recebimentos": [], "usuarios": [], "auditoria": []}
+            dados = doc.to_dict()
+            for chave in vazio:
+                dados.setdefault(chave, [])
+            return dados
+        return vazio
     except Exception as e:
-        print(f"Erro ao carregar do Firebase: {e}")
-        return {"clientes": [], "materiais": [], "orcamentos": [], "formas_pagamento": [], "recebimentos": [], "usuarios": [], "auditoria": []}
+        print(f"❌ Erro ao carregar do Firebase: {e}", flush=True)
+        return vazio
 
 def salvar_dados():
     if not db:
