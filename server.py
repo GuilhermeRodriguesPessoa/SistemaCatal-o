@@ -23,17 +23,21 @@ PDF_DIR = os.path.join(BASE_DIR, "PDF_Orcamentos")
 LOGO_FILE = os.path.join(BASE_DIR, "logo.png")
 os.makedirs(PDF_DIR, exist_ok=True)
 
-# --- CONEXÃO COM O FIREBASE (VIA ARQUIVO JSON NO GITHUB) ---
+# --- CONEXÃO COM O FIREBASE (VIA VARIÁVEL DE AMBIENTE) ---
 db = None
 try:
-    if os.path.exists(os.path.join(BASE_DIR, 'firebase-key.json')):
-        cred = credentials.Certificate(os.path.join(BASE_DIR, 'firebase-key.json'))
+    # Pega o JSON da variável de ambiente configurada no Render
+    credenciais_json = os.environ.get('FIREBASE_CREDENTIALS')
+    
+    if credenciais_json:
+        # Carrega a credencial a partir do texto JSON
+        cred = credentials.Certificate(json.loads(credenciais_json))
         if not firebase_admin._apps:
             firebase_admin.initialize_app(cred)
         db = firestore.client()
-        print("Conectado ao Firebase via arquivo JSON!")
+        print("Conectado ao Firebase via Variável de Ambiente!")
     else:
-        print("ERRO CRÍTICO: Arquivo firebase-key.json não encontrado na raiz do projeto!")
+        print("ERRO CRÍTICO: Variável FIREBASE_CREDENTIALS não encontrada no Render.")
 except Exception as e:
     print(f"ERRO AO CONECTAR NO FIREBASE: {e}")
 
