@@ -19,29 +19,19 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 import base64
 
-# --- CONEXÃO FORÇADA COM O FIREBASE ---
+# --- CONEXÃO COM O FIREBASE (VIA SECRET FILE DO RENDER) ---
 db = None
 try:
-    caminhos = [
-        '/etc/secrets/firebase-key.json',
-        os.path.join(os.path.dirname(os.path.abspath(__file__)), 'firebase-key.json'),
-        'firebase-key.json',
-    ]
-    chave_env = os.environ.get('FIREBASE_KEY')
-    caminho = next((c for c in caminhos if os.path.exists(c)), None)
-
-    if chave_env:
-        cred = credentials.Certificate(json.loads(chave_env))
-    elif caminho:
-        cred = credentials.Certificate(caminho)
-    else:
-        cred = None
-        print("❌ Nenhuma credencial do Firebase encontrada.", flush=True)
-
-    if cred:
+    # O Render coloca os Secret Files nesta pasta automaticamente
+    caminho_chave = '/etc/secrets/firebase-key.json'
+    
+    if os.path.exists(caminho_chave):
+        cred = credentials.Certificate(caminho_chave)
         firebase_admin.initialize_app(cred)
         db = firestore.client()
-        print("✅ Conectado ao Firebase!", flush=True)
+        print("✅ SUCESSO: Conectado ao Firebase via Secret File!", flush=True)
+    else:
+        print("❌ ERRO: Arquivo firebase-key.json NÃO ENCONTRADO em /etc/secrets/", flush=True)
 except Exception as e:
     print(f"❌ ERRO AO CONECTAR NO FIREBASE: {e}", flush=True)
 
