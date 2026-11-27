@@ -43,28 +43,10 @@ os.makedirs(PDF_DIR, exist_ok=True)
 
 os.makedirs(PDF_DIR, exist_ok=True)
 
-def carregar_dados():
-    if db:
-        try:
-            # Tenta ler do Firebase, mas com um tempo limite de 5 segundos
-            print("⏳ Tentando ler do Firebase...", flush=True)
-            doc = db.collection('sistema').document('dados_gerais').get(timeout=5)
-            if doc.exists:
-                dados = doc.to_dict()
-                if dados.get("clientes") or dados.get("orcamentos"):
-                    print("✅ Dados carregados do Firebase!", flush=True)
-                    return dados
-        except Exception as e:
-            print(f"⚠️ Erro/Timeout ao ler do Firebase: {e}. Usando arquivo local.", flush=True)
-
-    # Se o Firebase falhar ou estiver vazio, usa o arquivo local
-    print("📂 Carregando dados do arquivo local dados_marmoraria.json...", flush=True)
-    try:
-        with open('dados_marmoraria.json', 'r', encoding='utf-8') as arquivo:
-            return json.load(arquivo)
-    except Exception as e:
-        print(f"❌ Erro ao ler arquivo local: {e}", flush=True)
-        return {"clientes": [], "materiais": [], "orcamentos": [], "formas_pagamento": [], "recebimentos": [], "usuarios": [], "auditoria": []}
+# Carrega do arquivo local (rápido)
+dados_geral = carregar_dados()
+banco_clientes = dados_geral["clientes"]
+# ... (outras listas) ...
 
 def salvar_dados():
     if not db:
@@ -2665,7 +2647,19 @@ class MeuServidor(SimpleHTTPRequestHandler):
 
         self.send_response(404)
         self.end_headers()
-        
+
+# --- SALVA TUDO NO FIREBASE ASSIM QUE INICIAR ---
+if db:
+    try:
+        print("⏳ Enviando dados locais para o Firebase...", flush=True)
+        salvar_dados()
+        print("✅ Dados enviados para o Firebase com sucesso!", flush=True)
+    except Exception as e:
+        print(f"❌ Erro ao enviar para o Firebase: {e}", flush=True)
+
+if __name__ == '__main__':
+    # ... resto do código do servidor ...
+
     if __name__ == '__main__':
         porta = int(os.environ.get('PORT', 5000))
         endereco = ('0.0.0.0', porta)
