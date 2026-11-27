@@ -25,22 +25,9 @@ os.makedirs(PDF_DIR, exist_ok=True)
 
 import base64
 
-# --- CONEXÃO COM O FIREBASE (VIA BASE64) ---
+# --- CONEXÃO COM O FIREBASE (TEMPORARIAMENTE DESATIVADA) ---
 db = None
-try:
-    credenciais_base64 = os.environ.get('FIREBASE_CREDENTIALS_B64')
-    if credenciais_base64:
-        # Decodifica o Base64 de volta para JSON
-        json_str = base64.b64decode(credenciais_base64).decode('utf-8')
-        cred = credentials.Certificate(json.loads(json_str))
-        if not firebase_admin._apps:
-            firebase_admin.initialize_app(cred)
-        db = firestore.client()
-        print("Conectado ao Firebase via Base64!")
-    else:
-        print("ERRO: Variável FIREBASE_CREDENTIALS_B64 não encontrada.")
-except Exception as e:
-    print(f"ERRO AO CONECTAR NO FIREBASE: {e}")
+print("AVISO: Firebase desativado para teste de inicialização.")
 
 def carregar_dados():
     if not db:
