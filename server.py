@@ -2651,10 +2651,23 @@ class MeuServidor(SimpleHTTPRequestHandler):
         self.send_response(404)
         self.end_headers()
         
-print("DEBUG: CHEGOU NA PARTE DE INICIAR A PORTA 5000!")
-if __name__ == '__main__':
-    endereco = ('0.0.0.0', 5000)
-    servidor = ThreadingHTTPServer(endereco, MeuServidor)
-    servidor.daemon_threads = True
-    print("Sistema profissional de marmoraria online na porta 5000...")
-    servidor.serve_forever()
+# --- CONEXÃO COM O FIREBASE ---
+    print("🔍 Tentando conectar ao Firebase...")
+    try:
+        if os.path.exists('firebase-key.json'):
+            cred = credentials.Certificate('firebase-key.json')
+            firebase_admin.initialize_app(cred)
+            db = firestore.client()
+            print("✅ SUCESSO: Conectado ao Firebase!")
+        else:
+            print("❌ ERRO: Arquivo firebase-key.json NÃO ENCONTRADO.")
+    except Exception as e:
+        print(f"❌ ERRO AO CONECTAR: {e}")
+
+    print("DEBUG: CHEGOU NA PARTE DE INICIAR A PORTA 5000!")
+    if __name__ == '__main__':
+        endereco = ('0.0.0.0', 5000)
+        servidor = ThreadingHTTPServer(endereco, MeuServidor)
+        servidor.daemon_threads = True
+        print("Sistema profissional de marmoraria online na porta 5000...")
+        servidor.serve_forever()
