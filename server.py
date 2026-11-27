@@ -43,11 +43,6 @@ os.makedirs(PDF_DIR, exist_ok=True)
 
 os.makedirs(PDF_DIR, exist_ok=True)
 
-# Carrega do arquivo local (rápido)
-dados_geral = carregar_dados()
-banco_clientes = dados_geral["clientes"]
-# ... (outras listas) ...
-
 def salvar_dados():
     if not db:
         return
