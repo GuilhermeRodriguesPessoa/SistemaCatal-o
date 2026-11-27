@@ -18,25 +18,19 @@ from plano_corte import conteudo_plano_corte, ICONE_PLANO, gerar_pdf_plano
 import firebase_admin
 from firebase_admin import credentials, firestore
 import base64
-print("DEBUG: O SERVIDOR ESTÁ INICIANDO!")
-db = None
-print("DEBUG: VARIÁVEL DB CRIADA!")
 
-# --- CONEXÃO COM O FIREBASE ---
+# --- CONEXÃO FORÇADA COM O FIREBASE ---
 db = None
 try:
-    credenciais_base64 = os.environ.get('FIREBASE_CREDENTIALS_B64')
-    if credenciais_base64:
-        json_str = base64.b64decode(credenciais_base64).decode('utf-8')
-        cred = credentials.Certificate(json.loads(json_str))
-        if not firebase_admin._apps:
-            firebase_admin.initialize_app(cred)
+    if os.path.exists('firebase-key.json'):
+        cred = credentials.Certificate('firebase-key.json')
+        firebase_admin.initialize_app(cred)
         db = firestore.client()
-        print("Conectado ao Firebase via Base64!")
+        print("✅ SUCESSO: Conectado ao Firebase via arquivo firebase-key.json!")
     else:
-        print("ERRO: Variável FIREBASE_CREDENTIALS_B64 não encontrada.")
+        print("❌ ERRO: Arquivo firebase-key.json NÃO ENCONTRADO na raiz.")
 except Exception as e:
-    print(f"ERRO AO CONECTAR NO FIREBASE: {e}")
+    print(f"❌ ERRO AO CONECTAR NO FIREBASE: {e}")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, "dados_marmoraria.json")
