@@ -22,9 +22,7 @@ import base64
 # --- CONEXÃO COM O FIREBASE (VIA SECRET FILE DO RENDER) ---
 db = None
 try:
-    # O Render coloca os Secret Files nesta pasta automaticamente
     caminho_chave = '/etc/secrets/firebase-key.json'
-    
     if os.path.exists(caminho_chave):
         cred = credentials.Certificate(caminho_chave)
         firebase_admin.initialize_app(cred)
@@ -41,17 +39,26 @@ PDF_DIR = os.path.join(BASE_DIR, "PDF_Orcamentos")
 LOGO_FILE = os.path.join(BASE_DIR, "logo.png")
 os.makedirs(PDF_DIR, exist_ok=True)
 
-os.makedirs(PDF_DIR, exist_ok=True)
+# --- FUNÇÕES DE LEITURA E ESCRITA ---
+def carregar_dados():
+    print("📂 Carregando dados do arquivo local dados_marmoraria.json...", flush=True)
+    try:
+        with open(DATA_FILE, 'r', encoding='utf-8') as arquivo:
+            return json.load(arquivo)
+    except Exception as e:
+        print(f"❌ Erro ao ler arquivo local: {e}", flush=True)
+        return {"clientes": [], "materiais": [], "orcamentos": [], "formas_pagamento": [], "recebimentos": [], "usuarios": [], "auditoria": []}
 
 def salvar_dados():
     if not db:
         return
     try:
         db.collection('sistema').document('dados_gerais').set(dados_geral)
-        print("Dados salvos no Firebase com sucesso!")
+        print("Dados salvos no Firebase com sucesso!", flush=True)
     except Exception as e:
-        print(f"Erro ao salvar no Firebase: {e}")
-    
+        print(f"Erro ao salvar no Firebase: {e}", flush=True)
+
+# --- CARREGA OS DADOS LOCAIS E ENVIA PARA O FIREBASE ---
 dados_geral = carregar_dados()
 banco_clientes = dados_geral["clientes"]
 banco_materiais = dados_geral["materiais"]
@@ -60,6 +67,15 @@ banco_formas_pagamento = dados_geral["formas_pagamento"]
 banco_recebimentos = dados_geral["recebimentos"]
 banco_usuarios = dados_geral["usuarios"]
 banco_auditoria = dados_geral["auditoria"]
+
+if db:
+    try:
+        print("⏳ Enviando dados locais para o Firebase...", flush=True)
+        salvar_dados()
+        print("✅ Dados enviados para o Firebase com sucesso!", flush=True)
+    except Exception as e:
+        print(f"❌ Erro ao enviar para o Firebase: {e}", flush=True)
+
 SESSOES = {}
 NUMEROS_ORCAMENTO_RESERVADOS = set()
 BLOQUEIO_NUMEROS_ORCAMENTO = threading.Lock()
