@@ -19,6 +19,22 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 import base64
 
+# --- CONEXÃO COM O FIREBASE ---
+db = None
+try:
+    credenciais_base64 = os.environ.get('FIREBASE_CREDENTIALS_B64')
+    if credenciais_base64:
+        json_str = base64.b64decode(credenciais_base64).decode('utf-8')
+        cred = credentials.Certificate(json.loads(json_str))
+        if not firebase_admin._apps:
+            firebase_admin.initialize_app(cred)
+        db = firestore.client()
+        print("Conectado ao Firebase via Base64!")
+    else:
+        print("ERRO: Variável FIREBASE_CREDENTIALS_B64 não encontrada.")
+except Exception as e:
+    print(f"ERRO AO CONECTAR NO FIREBASE: {e}")
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, "dados_marmoraria.json")
 PDF_DIR = os.path.join(BASE_DIR, "PDF_Orcamentos")
