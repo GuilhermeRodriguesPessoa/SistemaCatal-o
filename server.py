@@ -14,20 +14,16 @@ import secrets
 import threading
 import unicodedata
 import uuid
+from plano_corte import conteudo_plano_corte, ICONE_PLANO, gerar_pdf_plano
 import firebase_admin
 from firebase_admin import credentials, firestore
-from plano_corte import conteudo_plano_corte, ICONE_PLANO, gerar_pdf_plano
+import base64
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_FILE = os.path.join(BASE_DIR, "dados_marmoraria.json")
 PDF_DIR = os.path.join(BASE_DIR, "PDF_Orcamentos")
 LOGO_FILE = os.path.join(BASE_DIR, "logo.png")
 os.makedirs(PDF_DIR, exist_ok=True)
-
-import base64
-
-# --- CONEXÃO COM O FIREBASE (TEMPORARIAMENTE DESATIVADA) ---
-db = None
-print("AVISO: Firebase desativado para teste de inicialização.")
 
 def carregar_dados():
     if not db:
@@ -35,33 +31,22 @@ def carregar_dados():
     try:
         doc = db.collection('sistema').document('dados_gerais').get()
         if doc.exists:
-            dados = doc.to_dict()
-            return {
-                "clientes": dados.get("clientes", []),
-                "materiais": dados.get("materiais", []),
-                "orcamentos": dados.get("orcamentos", []),
-                "formas_pagamento": dados.get("formas_pagamento", []),
-                "recebimentos": dados.get("recebimentos", []),
-                "usuarios": dados.get("usuarios", []),
-                "auditoria": dados.get("auditoria", []),
-                "modelo_pdf": dados.get("modelo_pdf", {}),
-            }
+            return doc.to_dict()
         else:
             return {"clientes": [], "materiais": [], "orcamentos": [], "formas_pagamento": [], "recebimentos": [], "usuarios": [], "auditoria": []}
     except Exception as e:
-        print(f"Erro ao carregar dados do Firebase: {e}")
+        print(f"Erro ao carregar do Firebase: {e}")
         return {"clientes": [], "materiais": [], "orcamentos": [], "formas_pagamento": [], "recebimentos": [], "usuarios": [], "auditoria": []}
 
 def salvar_dados():
     if not db:
-        print("Tentativa de salvar, mas o Firebase não está conectado.")
         return
     try:
         db.collection('sistema').document('dados_gerais').set(dados_geral)
         print("Dados salvos no Firebase com sucesso!")
     except Exception as e:
-        print(f"Erro ao salvar dados no Firebase: {e}")
-
+        print(f"Erro ao salvar no Firebase: {e}")
+    
 dados_geral = carregar_dados()
 banco_clientes = dados_geral["clientes"]
 banco_materiais = dados_geral["materiais"]
@@ -1494,43 +1479,1168 @@ def renderizar_orcamentos(usuario=None, cliente_selecionado='', baixar='', edita
                 }};
                 document.getElementById('adicionar-item').addEventListener('click', () => adicionarItem());
                 ligarBusca(document.getElementById('busca-cliente'), document.querySelector('[name="cliente_id"]'));
-                
-                // Inicialização (Edição ou Novo)
+                document.querySelector('[name="entrada_valor"]').addEventListener('input', atualizar);
+                document.querySelector('[name="desconto_percentual"]').addEventListener('input', atualizar);
+                document.querySelector('[name="gordura_percentual"]').addEventListener('input', atualizar);
+                formulario.addEventListener('input', salvarRascunho);
+                formulario.addEventListener('change', salvarRascunho);
+                formulario.addEventListener('submit', salvarRascunho);
                 if (dadosEdicao) {{
                     document.querySelector('[name="cliente_id"]').value = dadosEdicao.cliente_id || '';
                     document.querySelector('[name="forma_pagamento_id"]').value = dadosEdicao.forma_pagamento_id || '';
                     document.querySelector('[name="entrada_valor"]').value = dadosEdicao.entrada_valor || 0;
-                    document.querySelector('[name="prazo_entrega_dias"]').value = dadosEdicao.prazo_entrega_dias || 6;
-                    document.querySelector('[name="desconto_percentual"]').value = dadosEdicao.desconto_percentual || 0;
-                    document.querySelector('[name="gordura_percentual"]').value = dadosEdicao.gordura_percentual || 0;
                     document.querySelector('[name="observacoes"]').value = dadosEdicao.observacoes || '';
                     (dadosEdicao.itens || []).forEach(adicionarItem);
                 }} else {{
-                    // Tenta restaurar rascunho
-                    try {{
-                        const rascunho = JSON.parse(sessionStorage.getItem(chaveRascunho));
-                        if (rascunho) {{
-                            restaurandoRascunho = true;
-                            document.querySelector('[name="cliente_id"]').value = rascunho.cliente_id || '';
-                            document.getElementById('busca-cliente').value = rascunho.busca_cliente || '';
-                            document.querySelector('[name="forma_pagamento_id"]').value = rascunho.forma_pagamento_id || '';
-                            document.querySelector('[name="entrada_valor"]').value = rascunho.entrada_valor || 0;
-                            document.querySelector('[name="prazo_entrega_dias"]').value = rascunho.prazo_entrega_dias || 6;
-                            document.querySelector('[name="desconto_percentual"]').value = rascunho.desconto_percentual || 0;
-                            document.querySelector('[name="gordura_percentual"]').value = rascunho.gordura_percentual || 0;
-                            document.querySelector('[name="observacoes"]').value = rascunho.observacoes || '';
-                            (rascunho.itens || []).forEach(adicionarItem);
-                            restaurandoRascunho = false;
-                        }} else {{
-                            adicionarItem();
-                        }}
-                    }} catch (e) {{
+                    const parametros = new URLSearchParams(window.location.search);
+                    if (parametros.get('novo') === '1') {{
+                        sessionStorage.removeItem(chaveRascunho);
+                        history.replaceState(null, '', '/orcamentos');
+                    }}
+                    let rascunho = null;
+                    try {{ rascunho = JSON.parse(sessionStorage.getItem(chaveRascunho) || 'null'); }} catch {{}}
+                    if (rascunho && Array.isArray(rascunho.itens) && rascunho.itens.length) {{
+                        restaurandoRascunho = true;
+                        document.querySelector('[name="cliente_id"]').value = rascunho.cliente_id || '';
+                        document.getElementById('busca-cliente').value = rascunho.busca_cliente || '';
+                        document.querySelector('[name="forma_pagamento_id"]').value = rascunho.forma_pagamento_id || '';
+                        document.querySelector('[name="entrada_valor"]').value = rascunho.entrada_valor || '0';
+                        document.querySelector('[name="prazo_entrega_dias"]').value = rascunho.prazo_entrega_dias || '6';
+                        document.querySelector('[name="desconto_percentual"]').value = rascunho.desconto_percentual || '0';
+                        document.querySelector('[name="gordura_percentual"]').value = rascunho.gordura_percentual || '0';
+                        document.querySelector('[name="observacoes"]').value = rascunho.observacoes || '';
+                        rascunho.itens.forEach(adicionarItem);
+                        restaurandoRascunho = false;
+                        atualizar();
+                    }} else {{
                         adicionarItem();
                     }}
                 }}
-                formulario.addEventListener('input', atualizar);
-                formulario.addEventListener('change', atualizar);
-                atualizar();
+
             }})();
         </script>
+        """,
+        usuario,
+    )
+
+def renderizar_modelo_pdf(usuario=None):
+    m = modelo_pdf()
+
+    def lista(nome, rotulo):
+        return f"<label>{rotulo} (um item por linha)</label><textarea name='{nome}' rows='{len(m[nome]) + 2}'>{escape(chr(10).join(m[nome]))}</textarea>"
+
+    def campo(nome, rotulo):
+        return f"<div><label>{rotulo}</label><input name='{nome}' value='{escape(m[nome])}'></div>"
+
+    return pagina_base(
+        "/gerencial",
+        f"""
+        <h2>Modelo do PDF do orçamento</h2>
+        <div class="panel"><form method="POST" action="/salvar_modelo_pdf">
+            <div class="linha"><div><label>Cor principal (faixas e títulos)</label><input type="color" name="cor_principal" value="{m['cor_principal']}"></div><div><label>Cor da linha TOTAL</label><input type="color" name="cor_total" value="{m['cor_total']}"></div></div>
+            <div class="linha">{campo('titulo_orcamento', 'Título do orçamento')}{campo('titulo_pedido', 'Título do pedido aprovado')}</div>
+            {campo('texto_liberacao', 'Texto abaixo do prazo de entrega')}
+            {lista('condicoes', 'Condições de venda')}
+            {lista('acessorios', 'Acessórios a serem entregues')}
+            {lista('obra', 'Acabamento em obra')}
+            {campo('confirmacao', 'Frase de confirmação')}
+            <div class="linha">{campo('empresa', 'Empresa (assinatura)')}{campo('cnpj', 'CNPJ (assinatura)')}</div>
+            <button type="submit">Salvar modelo</button>
+        </form></div>
+        """,
+        usuario,
+    )
+
+def recebido_orcamento(numero):
+    return sum(float(item.get('valor', 0)) for item in banco_recebimentos if item.get('orcamento_numero') == numero)
+
+def renderizar_financeiro(usuario=None, inicio='', fim=''):
+    hoje = datetime.now().date()
+    previsao_entrega_padrao = (hoje + timedelta(days=6)).isoformat()
+    inicio = inicio or hoje.replace(day=1).isoformat()
+    fim = fim or hoje.isoformat()
+    try:
+        data_inicio = datetime.strptime(inicio, '%Y-%m-%d').date()
+        data_fim = datetime.strptime(fim, '%Y-%m-%d').date()
+    except ValueError:
+        data_inicio = hoje.replace(day=1)
+        data_fim = hoje
+        inicio, fim = data_inicio.isoformat(), data_fim.isoformat()
+
+    orcamentos_periodo = []
+    for orcamento in banco_orcamentos:
+        try:
+            data_orcamento = datetime.strptime(orcamento.get('data', ''), '%Y-%m-%d').date()
+        except ValueError:
+            continue
+        if data_inicio <= data_orcamento <= data_fim and orcamento.get('ativo', True):
+            orcamentos_periodo.append(orcamento)
+
+    recebimentos_periodo = [
+        recebimento for recebimento in banco_recebimentos
+        if inicio <= recebimento.get('data', '')[:10] <= fim
+    ]
+    vendas = []
+    for item in banco_orcamentos:
+        if not item.get('ativo', True) or item.get('status') not in ('Aprovado', 'Em produção', 'Concluído', 'Vendido'):
+            continue
+        data_venda = (item.get('aprovado_em') or item.get('data', ''))[:10]
+        if inicio <= data_venda <= fim:
+            vendas.append(item)
+    total_vendido = sum(float(item.get('valor_total', 0)) for item in vendas)
+    total_recebido = sum(float(item.get('valor', 0)) for item in recebimentos_periodo)
+    saldos_abertos = {
+        item.get('numero'): max(0, float(item.get('valor_total', 0)) - recebido_orcamento(item.get('numero')))
+        for item in vendas
+    }
+    total_aberto = sum(saldos_abertos.values())
+    classe_aberto = ' alerta' if total_aberto > 0 else ' zerado'
+    total_orcado_periodo = sum(float(item['valor_total']) for item in orcamentos_periodo)
+
+    por_vendedor = {}
+    por_cliente = {}
+    por_forma_pagamento = {}
+    for orcamento in vendas:
+        vendedor = orcamento.get('vendedor') or 'Não informado'
+        cliente = orcamento.get('cliente_nome') or 'Não informado'
+        valor_total = float(orcamento.get('valor_total', 0))
+        por_vendedor[vendedor] = por_vendedor.get(vendedor, 0) + valor_total
+        por_cliente[cliente] = por_cliente.get(cliente, 0) + valor_total
+        forma = orcamento.get('forma_pagamento_nome') or 'Não informado'
+        por_forma_pagamento[forma] = por_forma_pagamento.get(forma, 0) + valor_total
+    linhas_vendedor = ''.join(f'<tr><td>{escape(nome)}</td><td>{moeda(valor_total)}</td></tr>' for nome, valor_total in sorted(por_vendedor.items(), key=lambda item: item[1], reverse=True)) or '<tr><td colspan="2" class="muted">Sem vendas aprovadas neste período.</td></tr>'
+    linhas_cliente = ''.join(f'<tr><td>{escape(nome)}</td><td>{moeda(valor_total)}</td></tr>' for nome, valor_total in sorted(por_cliente.items(), key=lambda item: item[1], reverse=True)[:10]) or '<tr><td colspan="2" class="muted">Sem compras no período.</td></tr>'
+    linhas_formas_ranking = ''.join(f'<tr><td>{escape(nome)}</td><td>{moeda(valor_total)}</td></tr>' for nome, valor_total in sorted(por_forma_pagamento.items(), key=lambda item: item[1], reverse=True)) or '<tr><td colspan="2" class="muted">Sem vendas confirmadas no período.</td></tr>'
+
+    abertos = []
+    for orcamento in vendas:
+        saldo = saldos_abertos.get(orcamento.get('numero'), 0)
+        if saldo > 0:
+            abertos.append(f"<tr><td>{escape(orcamento['numero'])}</td><td>{escape(orcamento['cliente_nome'])}</td><td>{moeda(orcamento['valor_total'])}</td><td>{moeda(recebido_orcamento(orcamento['numero']))}</td><td>{moeda(saldo)}</td></tr>")
+    linhas_abertos = ''.join(abertos) or '<tr><td colspan="5" class="muted">Nenhum saldo em aberto no período.</td></tr>'
+
+    def tag_etapa_html(etapa):
+        etapa_texto = str(etapa or 'Outro')
+        etapa_normalizada = etapa_texto.casefold()
+        classe, icone = ('entrada', '📥') if etapa_normalizada == 'entrada' else ('entrega', '🚚') if 'entrega' in etapa_normalizada else ('medicao', '📐') if 'medi' in etapa_normalizada else ('outra', '•')
+        return f"<span class='tag-etapa {classe}'>{icone} {escape(etapa_texto)}</span>"
+
+    linhas_parcelas = []
+    for orcamento in vendas:
+        parcelas = orcamento.get('parcelas_previstas') or [
+            {'etapa': 'Pagamento', 'valor': float(orcamento.get('valor_total', 0)), 'data_prevista': ''}
+        ]
+        recebimentos = [item for item in banco_recebimentos if item.get('orcamento_numero') == orcamento.get('numero')]
+        nomes_etapas = {parcela.get('etapa', '') for parcela in parcelas}
+        recebido_etapa = {
+            etapa: sum(float(item.get('valor', 0)) for item in recebimentos if item.get('descricao') == etapa)
+            for etapa in nomes_etapas
+        }
+        parcial = sum(
+            float(item.get('valor', 0)) for item in recebimentos
+            if item.get('descricao') not in nomes_etapas
+        )
+        for parcela in parcelas:
+            etapa = parcela.get('etapa', 'Pagamento')
+            previsto = float(parcela.get('valor', 0))
+            pago = min(previsto, recebido_etapa.get(etapa, 0))
+            aberto_parcial = max(0, previsto - pago)
+            aplicado = min(aberto_parcial, parcial)
+            pago += aplicado
+            parcial -= aplicado
+            restante = max(0, previsto - pago)
+            if restante > 0:
+                etapa_html = tag_etapa_html(etapa)
+                linhas_parcelas.append(
+                    f"<tr><td>{escape(orcamento['numero'])}</td><td>{escape(orcamento['cliente_nome'])}</td>"
+                    f"<td>{etapa_html}</td><td>{escape(parcela.get('data_prevista', '-'))}</td>"
+                    f"<td>{moeda(previsto)}</td><td>{moeda(pago)}</td><td>{moeda(restante)}</td></tr>"
+                )
+    linhas_parcelas_html = ''.join(linhas_parcelas) or '<tr><td colspan="7" class="muted">Nenhuma parcela pendente no período.</td></tr>'
+
+    cards_indicadores = f"""
+        <div class='cards'>
+            <div class='card'><span class='muted'>Vendido/aprovado</span><strong class='indicador-vendido'>{moeda(total_vendido)}</strong></div>
+            <div class='card'><span class='muted'>Recebido no período</span><strong class='indicador-recebido'>{moeda(total_recebido)}</strong></div>
+            <div class='card'><span class='muted'>Em aberto</span><strong class='indicador-aberto{classe_aberto}'>{moeda(total_aberto)}</strong></div>
+            <div class='card'><span class='muted'>Orçado no período</span><strong class='indicador-orcado'>{moeda(total_orcado_periodo)}</strong></div>
+        </div>
+    """
+    filtro_periodo = f"""<form method='GET' action='/financeiro' class='linha filtro-periodo'><div><label>De</label><input type='date' name='inicio' value='{escape(inicio)}'></div><div><label>Até</label><input type='date' name='fim' value='{escape(fim)}'></div><div><button type='submit'>Aplicar período</button></div></form>"""
+    def pagina_com_abas_financeiras(lancamentos_html):
+        return pagina_base('/financeiro', f"""
+            <style>
+                .financeiro-tabs {{ display:grid; grid-template-columns:repeat(2,minmax(220px,300px)); gap:10px; margin:0 0 22px; padding:0 0 14px; border-bottom:1px solid var(--line); background:transparent; }}
+                .financeiro-tabs button {{ width:100%; min-height:46px; padding:10px 16px; border:1px solid #dce5e0; border-radius:10px; background:#fff; color:#53645c; text-align:left; box-shadow:0 2px 7px #20342e08; }}
+                .financeiro-tabs button.ativa {{ border-color:var(--green); background:var(--green); color:#fff; box-shadow:0 5px 14px #276b5828; }}
+                .financeiro-pane[hidden] {{ display:none; }}
+                .financeiro-pane {{ display:grid; gap:16px; }}
+                .financeiro-pane#financeiro-lancamentos {{ max-width:1080px; align-content:start; }}
+                .financeiro-pane > .panel {{ padding:22px; border-radius:14px; }}
+                .indicador-vendido {{ color:#24496b !important; }} .indicador-recebido {{ color:#268052 !important; }}
+                .indicador-aberto.zerado {{ color:#77827d !important; }} .indicador-aberto.alerta {{ color:#bd5d32 !important; }}
+                .indicador-orcado {{ color:#7654a6 !important; }}
+                .ranking-grid {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; align-items:stretch; }}
+                .ranking-card {{ height:100%; }} .tag-etapa {{ display:inline-flex; align-items:center; gap:5px; padding:4px 9px; border-radius:999px; font-size:12px; font-weight:650; white-space:nowrap; }}
+                .tag-etapa.entrada {{ background:#e4f3e9; color:#286845; }} .tag-etapa.entrega {{ background:#e5f0fb; color:#315f8d; }}
+                .tag-etapa.medicao {{ background:#fff2d5; color:#91621b; }} .tag-etapa.outra {{ background:#f0f1f0; color:#58635d; }}
+                .financeiro-form {{ grid-template-columns:minmax(190px,1.5fr) minmax(130px,1fr) minmax(120px,.9fr) minmax(140px,1.1fr) minmax(140px,1fr) auto; align-items:end; margin:14px 0 0; }}
+                .financeiro-form button {{ min-height:42px; width:auto; white-space:nowrap; }}
+                .forma-pagamento-form {{ grid-template-columns:minmax(180px,1fr) minmax(220px,1.4fr) auto; align-items:end; }}
+                @media(max-width:900px) {{ .financeiro-form {{ grid-template-columns:repeat(3,minmax(140px,1fr)); }} .financeiro-form button {{ width:100%; }} }}
+                @media(max-width:700px) {{ .financeiro-tabs {{ grid-template-columns:1fr; }} .ranking-grid {{ grid-template-columns:1fr; }} .forma-pagamento-form {{ grid-template-columns:1fr; }} }}
+            </style>
+            <h2>Financeiro</h2>
+            {filtro_periodo}
+            <nav class='financeiro-tabs' aria-label='Seções do financeiro' role='tablist'>
+                <button type='button' class='ativa' role='tab' aria-selected='true' data-pane='financeiro-visao'>📊 Visão Geral e Relatórios</button>
+                <button type='button' role='tab' aria-selected='false' data-pane='financeiro-lancamentos'>💸 Lançamentos e Configurações</button>
+            </nav>
+            <section class='financeiro-pane' id='financeiro-visao' role='tabpanel'>{relatorios_html}</section>
+            <section class='financeiro-pane' id='financeiro-lancamentos' role='tabpanel' hidden>{lancamentos_html}</section>
+            <script>
+                document.querySelectorAll('.financeiro-tabs [role="tab"]').forEach(botao => botao.addEventListener('click', () => {{
+                    document.querySelectorAll('.financeiro-tabs [role="tab"]').forEach(aba => {{ const ativa = aba === botao; aba.classList.toggle('ativa', ativa); aba.setAttribute('aria-selected', ativa); }});
+                    document.querySelectorAll('.financeiro-pane').forEach(painel => painel.hidden = painel.id !== botao.dataset.pane);
+                }}));
+            </script>
+        """, usuario)
+
+    formas = ''.join(
+        f"<tr><td>{escape(forma['nome'])}</td><td>{escape(forma.get('descricao', ''))}</td><td><details><summary>Ações</summary><div class='acoes-menu'><form method='POST' action='/alterar_forma_pagamento'><input type='hidden' name='id' value='{escape(forma['id'])}'><label>Nome</label><input name='nome' value='{escape(forma['nome'])}' required><label>Descrição</label><input name='descricao' value='{escape(forma.get('descricao', ''))}'><button type='submit'>Salvar</button></form><form method='POST' action='/excluir_forma_pagamento'><input type='hidden' name='id' value='{escape(forma['id'])}'><button class='warning' type='submit'>Excluir forma</button></form></div></details></td></tr>"
+        for forma in banco_formas_pagamento if forma.get('ativo', True)
+    ) or '<tr><td colspan="3" class="muted">Nenhuma forma cadastrada.</td></tr>'
+    recebimentos = ''.join(
+        f"<tr><td>{escape(item.get('data', '')[:10])}</td><td>{escape(item.get('orcamento_numero', ''))}</td><td>{escape(item.get('cliente_nome', ''))}</td><td>{tag_etapa_html(item.get('descricao', ''))}</td><td>{moeda(item.get('valor', 0))}</td><td>{escape(item.get('usuario_nome', ''))}</td></tr>"
+        for item in sorted(recebimentos_periodo, key=lambda item: item.get('data', ''), reverse=True)
+    ) or '<tr><td colspan="6" class="muted">Sem recebimentos baixados no período.</td></tr>'
+    auditoria = ''.join(
+        f"<tr><td>{escape(item.get('data_hora', ''))}</td><td>{escape(item.get('usuario_nome', ''))}</td><td>{escape(item.get('acao', ''))}</td><td>{escape(item.get('entidade', ''))} {escape(item.get('entidade_id', ''))}</td><td>{escape(item.get('detalhes', ''))}</td></tr>"
+        for item in reversed(banco_auditoria[-30:])
+    ) or '<tr><td colspan="5" class="muted">Nenhuma alteração registrada.</td></tr>'
+    relatorios_html = f"""
+        {cards_indicadores}
+        <div class='ranking-grid'>
+            <div class='panel ranking-card'><h3>Formas de pagamento</h3><table><tr><th>Forma</th><th>Vendido</th></tr>{linhas_formas_ranking}</table></div>
+            <div class='panel ranking-card'><h3>Clientes que mais compraram</h3><table><tr><th>Cliente</th><th>Compras</th></tr>{linhas_cliente}</table></div>
+        </div>
+        <div class='panel'><h3>Vendas por vendedor</h3><table><tr><th>Vendedor</th><th>Vendido</th></tr>{linhas_vendedor}</table></div>
+        <div class='panel'><h3>Orçamentos com saldo em aberto</h3><table><tr><th>Orçamento</th><th>Cliente</th><th>Total</th><th>Recebido</th><th>Em aberto</th></tr>{linhas_abertos}</table><h3>Parcelas previstas pendentes</h3><table><tr><th>Orçamento</th><th>Cliente</th><th>Etapa</th><th>Previsão</th><th>Parcela</th><th>Recebido</th><th>Restante</th></tr>{linhas_parcelas_html}</table></div>
+        <div class='panel'><h3>Recebimentos no período</h3><table><tr><th>Data</th><th>Orçamento</th><th>Cliente</th><th>Etapa</th><th>Valor</th><th>Responsável</th></tr>{recebimentos}</table></div>
+        <details class='panel auditoria'><summary>Auditoria recente</summary><table><tr><th>Data/hora</th><th>Usuário</th><th>Ação</th><th>Registro</th><th>Detalhes</th></tr>{auditoria}</table></details>
+    """
+
+    if not pode_acessar(usuario, '/financeiro', escrever=True):
+        formas_leitura = ''.join(
+            f"<tr><td>{escape(forma.get('nome', ''))}</td><td>{escape(forma.get('descricao', ''))}</td></tr>"
+            for forma in banco_formas_pagamento if forma.get('ativo', True)
+        ) or '<tr><td colspan="2" class="muted">Nenhuma forma cadastrada.</td></tr>'
+        lancamentos_html = f"<div class='panel'><h3>Formas de pagamento</h3><table><tr><th>Forma</th><th>Descrição</th></tr>{formas_leitura}</table></div>"
+        return pagina_com_abas_financeiras(lancamentos_html)
+
+    lancamentos_html = f"""
+        <div class="panel"><h3>Formas de pagamento</h3><form method="POST" action="/salvar_forma_pagamento" class="forma-pagamento-form"><div><label>Nome</label><input name="nome" placeholder="Pix, cartão, transferência..." required></div><div><label>Descrição</label><input name="descricao"></div><button type="submit">Adicionar forma</button></form><table><tr><th>Forma</th><th>Descrição</th><th>Ações</th></tr>{formas}</table></div>
+    """
+    return pagina_com_abas_financeiras(lancamentos_html)
+
+def campos_permissoes(permissoes=None):
+    permissoes = permissoes or {}
+    campos = []
+    for rota, titulo in ABAS.items():
+        nivel = permissoes.get(rota, 'nenhum')
+        opcoes = ''.join(
+            f"<option value='{valor}' {'selected' if nivel == valor else ''}>{rotulo}</option>"
+            for valor, rotulo in [('nenhum', 'Sem acesso'), ('visualizar', 'Visualizar'), ('editar', 'Editar')]
+        )
+        campos.append(f"<div><label>{escape(titulo)}</label><select name='permissao_{escape(rota)}'>{opcoes}</select></div>")
+    return ''.join(campos)
+
+def renderizar_funcionarios(usuario=None):
+    permissoes_opcoes = campos_permissoes()
+    linhas_funcionarios = []
+    for item in banco_usuarios:
+        status = 'Administrador' if item.get('administrador') else 'Ativo' if item.get('ativo', True) else 'Inativo'
+        permissoes_item = campos_permissoes(item.get('permissoes', {}))
+        linhas_funcionarios.append(f"""
+            <tr><td>{escape(item.get('nome', ''))}</td><td>{escape(item.get('login', ''))}</td><td>{status}</td>
+            <td><details><summary>Alterar</summary><div class='acoes-menu'>
+                <form method='POST' action='/alterar_funcionario'>
+                    <input type='hidden' name='id' value='{escape(item['id'])}'>
+                    <label>Nome</label><input name='nome' value='{escape(item.get('nome', ''))}' required>
+                    <label>Login</label><input name='login' value='{escape(item.get('login', ''))}' required>
+                    <label>Nova senha (deixe vazia para manter)</label><input name='senha' type='password' minlength='10'>
+                    <div class='permissoes-grid'>{permissoes_item}</div>
+                    <button type='submit'>Salvar permissões</button>
+                </form>
+                <form method='POST' action='/excluir_funcionario'><input type='hidden' name='id' value='{escape(item['id'])}'><button class='warning' type='submit'>Desativar funcionário</button></form>
+            </div></details></td></tr>
+        """)
+    funcionarios = ''.join(linhas_funcionarios) or '<tr><td colspan="4" class="muted">Nenhum funcionário cadastrado.</td></tr>'
+    return pagina_base('/funcionarios', f"""
+        <style>.permissoes-grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; }} .acoes-menu {{ position:absolute; z-index:3; right:0; width:min(600px,80vw); max-height:70vh; overflow:auto; padding:12px; border:1px solid #d4ded9; border-radius:6px; background:#fff; box-shadow:0 8px 24px #18231e22; }} details {{ position:relative; }}</style>
+        <h2>Funcionários e permissões</h2>
+        <div class="panel"><h3>Cadastrar funcionário</h3><form method="POST" action="/salvar_funcionario"><div class="linha"><div><label>Nome</label><input name="nome" required></div><div><label>Login</label><input name="login" autocomplete="off" required></div><div><label>Senha (mínimo 10 caracteres)</label><input name="senha" type="password" minlength="10" required></div></div><div class="permissoes-grid">{permissoes_opcoes}</div><button type="submit">Cadastrar funcionário</button></form></div>
+        <div class="panel"><h3>Equipe cadastrada</h3><table><tr><th>Nome</th><th>Login</th><th>Status</th><th>Permissões</th></tr>{funcionarios}</table></div>
     """, usuario)
+
+def renderizar_inicio(usuario=None):
+    ativos = [o for o in banco_orcamentos if o.get('ativo', True)]
+    em_analise = sum(1 for o in ativos if o.get('status', 'Em análise') == 'Em análise')
+    em_producao = sum(1 for o in ativos if o.get('status') in ('Aprovado', 'Em produção'))
+    total_aprovado = sum(float(o.get('valor_total', 0)) for o in ativos if o.get('status') in ('Aprovado', 'Em produção', 'Concluído', 'Vendido'))
+    total_clientes = sum(1 for c in banco_clientes if c.get('ativo', True))
+    descricoes = {
+        '/orcamentos': 'Criar novo orçamento',
+        '/clientes': 'Cadastro e orçamentos por cliente',
+        '/historico': 'Pedidos, aprovações e revisões',
+        '/materiais': 'Materiais, acabamentos e preços',
+        '/financeiro': 'Recebimentos e formas de pagamento',
+        '/funcionarios': 'Equipe e permissões',
+        '/gerencial': 'Cores, textos e condições do PDF',
+    }
+    cores = {'/orcamentos': '#276b58', '/clientes': '#3b7ea1', '/historico': '#8a6fb0', '/materiais': '#b77936', '/financeiro': '#2f8f6b', '/funcionarios': '#c0576b', '/gerencial': '#5c6f82'}
+    tiles = ''.join(
+        f"<a class='tile' href='{rota}' style='--cor:{cores.get(rota, '#276b58')}'><span class='tile-icone'>{icone_svg(rota)}</span><strong>{titulo}</strong><small>{descricoes.get(rota, '')}</small></a>"
+        for rota, titulo in ABAS.items()
+        if pode_acessar(usuario, rota) and (rota != '/funcionarios' or usuario.get('administrador'))
+    )
+    primeiro_nome = escape((usuario or {}).get('nome', '').split(' ')[0])
+    return pagina_base('/inicio', f"""
+        <style>
+            .inicio-saudacao {{ margin: 0 0 4px; font-size: 26px; }}
+            .inicio-kpis {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: 18px 0 26px; }}
+            .kpi {{ padding: 16px 18px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }}
+            .kpi span {{ display: block; color: var(--muted); font-size: 12px; margin-bottom: 6px; }}
+            .kpi strong {{ font-size: 22px; color: var(--green-dark); }}
+            .tiles {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; }}
+            .tile {{ display: flex; flex-direction: column; gap: 8px; padding: 22px; border-radius: 16px; background: #fff; border: 1px solid var(--line); text-decoration: none; color: var(--ink); transition: transform .15s ease, box-shadow .15s ease; }}
+            .tile:hover {{ transform: translateY(-4px); box-shadow: 0 14px 28px #18231e1f; }}
+            .tile-icone {{ display: grid; place-items: center; width: 56px; height: 56px; border-radius: 14px; background: color-mix(in srgb, var(--cor) 14%, white); color: var(--cor); }}
+            .tile-icone svg {{ width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }}
+            .tile strong {{ font-size: 16px; }}
+            .tile small {{ color: var(--muted); font-size: 12.5px; }}
+        </style>
+        <h2 class="inicio-saudacao">Olá, {primeiro_nome}</h2>
+        <p class="muted">Escolha um módulo para começar.</p>
+        <div class="inicio-kpis">
+            <div class="kpi"><span>Orçamentos em análise</span><strong>{em_analise}</strong></div>
+            <div class="kpi"><span>Pedidos em produção</span><strong>{em_producao}</strong></div>
+            <div class="kpi"><span>Total aprovado</span><strong>{moeda(total_aprovado)}</strong></div>
+            <div class="kpi"><span>Clientes</span><strong>{total_clientes}</strong></div>
+        </div>
+        <div class="tiles">{tiles}</div>
+    """, usuario)
+
+def renderizar_pagina(caminho, usuario=None, parametros=None):
+    rota = caminho if caminho in ABAS or caminho == '/inicio' else '/inicio'
+    if rota == '/inicio':
+        return renderizar_inicio(usuario)
+    if rota == '/orcamentos':
+        return renderizar_orcamentos(usuario, (parametros or {}).get('cliente', [''])[0], (parametros or {}).get('baixar', [''])[0], (parametros or {}).get('editar', [''])[0], (parametros or {}).get('sucesso', [''])[0] == '1')
+    if rota == '/clientes':
+        return renderizar_clientes(usuario)
+    if rota == '/historico':
+        return renderizar_historico(usuario, (parametros or {}).get('ordem', ['recentes'])[0])
+    if rota == '/materiais':
+        return renderizar_materiais(usuario)
+    if rota == '/gerencial':
+        return renderizar_modelo_pdf(usuario)
+    if rota == '/financeiro':
+        return renderizar_financeiro(usuario)
+    if rota == '/funcionarios':
+        return renderizar_funcionarios(usuario)
+    if rota == '/plano':
+        return pagina_base('/plano', conteudo_plano_corte(banco_materiais, banco_orcamentos), usuario)
+    return renderizar_orcamentos(usuario)
+
+def renderizar_login():
+    if not banco_usuarios:
+        conteudo = """
+        <h2>Configuração inicial</h2>
+        <div class="panel login-panel">
+            <img src="/logo.png" alt="Catalão Mármores e Granitos" class="logo-login">
+            <p>Cadastre o primeiro administrador para começar a usar o sistema.</p>
+            <form method="POST" action="/configurar_administrador">
+                <div><label>Nome</label><input name="nome" required></div>
+                <div><label>Login</label><input name="login" autocomplete="username" required></div>
+                <div><label>Senha (mínimo 10 caracteres)</label><input name="senha" type="password" autocomplete="new-password" minlength="10" required></div>
+                <button type="submit">Criar administrador</button>
+            </form>
+        </div>
+        """
+    else:
+        conteudo = """
+        <h2>Acessar sistema</h2>
+        <div class="panel login-panel">
+            <img src="/logo.png" alt="Catalão Mármores e Granitos" class="logo-login">
+            <form method="POST" action="/entrar">
+                <div><label>Login</label><input name="login" autocomplete="username" required></div>
+                <div><label>Senha</label><input name="senha" type="password" autocomplete="current-password" required></div>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+        """
+    return pagina_base('', conteudo)
+
+class MeuServidor(SimpleHTTPRequestHandler):
+    def do_GET(self):
+        url = urlparse(self.path)
+        caminho = url.path or '/orcamentos'
+        parametros = parse_qs(url.query)
+        usuario = usuario_da_requisicao(self)
+
+        if caminho == '/logo.png':
+            if not os.path.isfile(LOGO_FILE):
+                self.send_error(404)
+                return
+            with open(LOGO_FILE, 'rb') as imagem:
+                conteudo_logo = imagem.read()
+            self.send_response(200)
+            self.send_header('Content-Type', 'image/png')
+            self.send_header('Content-Length', str(len(conteudo_logo)))
+            self.end_headers()
+            self.wfile.write(conteudo_logo)
+            return
+
+        if caminho in ('/', '/login'):
+            if usuario:
+                redirecionar(self, '/inicio')
+                return
+            pagina = renderizar_login()
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html; charset=utf-8')
+            self.end_headers()
+            self.wfile.write(pagina.encode('utf-8'))
+            return
+
+        if not banco_usuarios:
+            redirecionar(self, '/login')
+            return
+        if not usuario:
+            redirecionar(self, '/login')
+            return
+
+        if caminho == '/emitir_orcamento':
+            if not (pode_acessar(usuario, '/historico') or pode_acessar(usuario, '/orcamentos')):
+                self.send_error(403, 'Sem permissão para visualizar orçamentos')
+                return
+            numero = parametros.get('id', [''])[0]
+            orcamento = next((item for item in banco_orcamentos if item['numero'] == numero), None)
+            if not orcamento:
+                self.send_response(404)
+                self.end_headers()
+                return
+
+            arquivo_pdf = gerar_pdf_orcamento(orcamento)
+            with open(arquivo_pdf, 'rb') as arquivo:
+                conteudo = arquivo.read()
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/pdf')
+            nome_download = os.path.basename(arquivo_pdf)
+            nome_ascii = unicodedata.normalize('NFKD', nome_download).encode('ascii', 'ignore').decode('ascii') or 'orcamento.pdf'
+            self.send_header('Content-Disposition', f"attachment; filename=\"{nome_ascii}\"; filename*=UTF-8''{quote(nome_download)}")
+            self.send_header('Content-Length', str(len(conteudo)))
+            self.end_headers()
+            self.wfile.write(conteudo)
+            return
+
+        if caminho not in ABAS and caminho != '/inicio':
+            self.send_error(404)
+            return
+        if caminho == '/funcionarios' and not usuario.get('administrador'):
+            self.send_error(403, 'Apenas administradores podem gerenciar funcionários')
+            return
+        if not pode_acessar(usuario, caminho):
+            self.send_error(403, 'Você não tem permissão para acessar esta aba')
+            return
+
+        if caminho == '/clientes':
+            pagina = renderizar_clientes(usuario, parametros.get('q', [''])[0].strip())
+        elif caminho == '/materiais':
+            pagina = renderizar_materiais(usuario, parametros.get('q', [''])[0].strip())
+        elif caminho == '/financeiro':
+            pagina = renderizar_financeiro(usuario, parametros.get('inicio', [''])[0], parametros.get('fim', [''])[0])
+        elif caminho == '/funcionarios':
+            pagina = renderizar_funcionarios(usuario)
+        else:
+            pagina = renderizar_pagina(caminho, usuario, parametros)
+        self.send_response(200)
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(pagina.encode("utf-8"))
+
+    def do_POST(self):
+        tamanho_dados = int(self.headers.get('Content-Length', 0))
+        dados_brutos = self.rfile.read(tamanho_dados).decode('utf-8')
+        dados = parse_qs(dados_brutos, keep_blank_values=True)
+
+        def valor(chave, padrao=''):
+            return dados.get(chave, [padrao])[0]
+
+        caminho = urlparse(self.path).path
+        if caminho == '/configurar_administrador':
+            if banco_usuarios:
+                redirecionar(self, '/login')
+                return
+            nome = valor('nome').strip()
+            login = valor('login').strip().casefold()
+            senha = valor('senha')
+            if not nome or not login or len(senha) < 10:
+                redirecionar(self, '/login?erro=validacao')
+                return
+            administrador = {
+                'id': novo_id('USR'),
+                'nome': nome,
+                'login': login,
+                'senha_hash': criar_hash_senha(senha),
+                'administrador': True,
+                'permissoes': {rota: 'editar' for rota in ABAS},
+                'ativo': True,
+            }
+            banco_usuarios.append(administrador)
+            registrar_auditoria(administrador, 'criou', 'administrador', administrador['id'], 'Configuração inicial')
+            token = secrets.token_urlsafe(32)
+            SESSOES[token] = administrador['id']
+            self.send_response(303)
+            self.send_header('Location', '/inicio')
+            self.send_header('Set-Cookie', f'sessao={token}; HttpOnly; SameSite=Lax; Path=/')
+            self.end_headers()
+            return
+
+        if caminho == '/entrar':
+            login = valor('login').strip().casefold()
+            senha = valor('senha')
+            usuario = next((item for item in banco_usuarios if item.get('login', '').casefold() == login and item.get('ativo', True)), None)
+            if not usuario or not validar_senha(senha, usuario.get('senha_hash')):
+                redirecionar(self, '/login?erro=credenciais')
+                return
+            token = secrets.token_urlsafe(32)
+            SESSOES[token] = usuario['id']
+            registrar_auditoria(usuario, 'entrou', 'sessao', usuario['id'])
+            self.send_response(303)
+            self.send_header('Location', '/inicio')
+            self.send_header('Set-Cookie', f'sessao={token}; HttpOnly; SameSite=Lax; Path=/')
+            self.end_headers()
+            return
+
+        if caminho == '/sair':
+            usuario = usuario_da_requisicao(self)
+            if usuario:
+                registrar_auditoria(usuario, 'saiu', 'sessao', usuario['id'])
+            cookie_header = self.headers.get('Cookie', '')
+            cookies = SimpleCookie()
+            cookies.load(cookie_header)
+            cookie = cookies.get('sessao')
+            if cookie:
+                SESSOES.pop(cookie.value, None)
+            redirecionar(self, '/login', limpar_sessao=True)
+            return
+
+        usuario = usuario_da_requisicao(self)
+        if not usuario:
+            redirecionar(self, '/login')
+            return
+
+        if caminho == '/sair':
+            registrar_auditoria(usuario, 'saiu', 'sessao', usuario['id'])
+            cookies = SimpleCookie()
+            cookies.load(self.headers.get('Cookie', ''))
+            cookie = cookies.get('sessao')
+            if cookie:
+                SESSOES.pop(cookie.value, None)
+            redirecionar(self, '/login', limpar_sessao=True)
+            return
+        if caminho == '/plano_pdf':
+            if not pode_acessar(usuario, '/plano'):
+                self.send_error(403, 'Sem permissão')
+                return
+            projeto_json = valor('projeto', '')
+            try:
+                projeto = json.loads(projeto_json)
+            except (ValueError, TypeError):
+                self.send_error(400, 'JSON inválido')
+                return
+            nome_pdf = f'plano_{datetime.now().strftime("%Y%m%d%H%M%S")}.pdf'
+            caminho_pdf = os.path.join(PDF_DIR, nome_pdf)
+            try:
+                gerar_pdf_plano(projeto, caminho_pdf, LOGO_FILE)
+                with open(caminho_pdf, 'rb') as arq:
+                    conteudo_pdf = arq.read()
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/pdf')
+                self.send_header('Content-Disposition', f'attachment; filename="{nome_pdf}"')
+                self.send_header('Content-Length', str(len(conteudo_pdf)))
+                self.end_headers()
+                self.wfile.write(conteudo_pdf)
+            except Exception as erro:
+                self.send_error(500, f'Erro ao gerar PDF: {erro}')
+            return
+
+        rotas_post = {
+            '/salvar_cliente': '/clientes',
+            '/alterar_cliente': '/clientes',
+            '/excluir_cliente': '/clientes',
+            '/salvar_material': '/materiais',
+            '/alterar_material': '/materiais',
+            '/excluir_material': '/materiais',
+            '/salvar_orcamento': '/orcamentos',
+            '/salvar_forma_pagamento': '/financeiro',
+            '/salvar_modelo_pdf': '/gerencial',
+            '/alterar_forma_pagamento': '/financeiro',
+            '/excluir_forma_pagamento': '/financeiro',
+            '/registrar_recebimento': '/financeiro',
+            '/alterar_orcamento': '/historico',
+            '/aprovar_orcamento': '/historico',
+            '/concluir_orcamento': '/historico',
+            '/excluir_orcamento': '/historico',
+            '/salvar_funcionario': '/funcionarios',
+            '/alterar_funcionario': '/funcionarios',
+            '/excluir_funcionario': '/funcionarios',
+        }
+        rota_permitida = rotas_post.get(caminho)
+        if not rota_permitida or not pode_acessar(usuario, rota_permitida, escrever=True):
+            self.send_error(403, 'Você não tem permissão para realizar esta alteração')
+            return
+        if rota_permitida == '/funcionarios' and not usuario.get('administrador'):
+            self.send_error(403, 'Apenas administradores podem gerenciar funcionários')
+            return
+
+        if caminho == '/salvar_cliente':
+            nome = valor('nome').strip()
+            if nome:
+                cliente_id = novo_id('CLI')
+                banco_clientes.append({
+                    "id": cliente_id,
+                    "nome": nome,
+                    "telefone": valor('telefone', ''),
+                    "endereco": valor('endereco', valor('cidade', '')),
+                    "observacoes": valor('observacoes', ''),
+                    "ativo": True,
+                })
+                registrar_auditoria(usuario, 'criou', 'cliente', cliente_id, nome)
+            self.send_response(303)
+            self.send_header('Location', '/clientes')
+            self.end_headers()
+            return
+
+        if caminho == '/alterar_cliente':
+            cliente = next((item for item in banco_clientes if item.get('id') == valor('id') and item.get('ativo', True)), None)
+            nome = valor('nome').strip()
+            if cliente and nome:
+                cliente.update({
+                    'nome': nome,
+                    'telefone': valor('telefone', ''),
+                    'endereco': valor('endereco', ''),
+                    'observacoes': valor('observacoes', ''),
+                })
+                registrar_auditoria(usuario, 'alterou', 'cliente', cliente['id'], nome)
+            redirecionar(self, '/clientes')
+            return
+
+        if caminho == '/excluir_cliente':
+            cliente = next((item for item in banco_clientes if item.get('id') == valor('id') and item.get('ativo', True)), None)
+            if cliente:
+                cliente['ativo'] = False
+                registrar_auditoria(usuario, 'excluiu', 'cliente', cliente['id'], cliente.get('nome', ''))
+            redirecionar(self, '/clientes')
+            return
+
+        if caminho == '/salvar_material':
+            codigo = valor('codigo').strip()
+            nome = valor('nome').strip()
+            if codigo and nome:
+                tipo = valor('tipo', 'material')
+                unidade = {
+                    'material': valor('unidade_material', 'm²'),
+                    'acabamento': valor('unidade_acabamento', 'm²'),
+                    'servico': valor('unidade_servico', 'unidade'),
+                }.get(tipo, 'm²')
+                preco_linear = float(valor('preco_linear', '0') or '0')
+                preco_formulario = {
+                    'material': valor('preco_material', '0'),
+                    'acabamento': valor('preco_unitario', '0'),
+                    'servico': valor('preco_servico', '0'),
+                }.get(tipo, '0')
+                if tipo not in ('material', 'acabamento', 'servico'):
+                    tipo = 'material'
+                if tipo == 'material':
+                    unidade = 'm²'
+                elif unidade not in ('m²', 'metro linear', 'unidade', 'm² + linear'):
+                    unidade = 'm²'
+                material_id = novo_id('MAT')
+                base = next((m for m in banco_materiais if m.get('id') == valor('material_base_id') and m.get('ativo', True)), None)
+                preco_principal = float(base['preco_unitario']) if base and unidade == 'm² + linear' else float(preco_formulario or '0')
+                banco_materiais.append({
+                    "id": material_id,
+                    "tipo": tipo,
+                    "codigo": codigo,
+                    "nome": nome,
+                    "categoria": valor('categoria', 'Geral'),
+                    "unidade": unidade,
+                    "preco_unitario": preco_principal,
+                    "preco_linear": preco_linear,
+                    "material_base_id": base['id'] if base else '',
+                    "largura_m": float(valor('largura_m', '0') or '0'),
+                    "permite_auxiliar": valor('permite_auxiliar') == '1',
+                    "ativo": True,
+                })
+                registrar_auditoria(usuario, 'criou', 'material', material_id, nome)
+            self.send_response(303)
+            self.send_header('Location', '/materiais')
+            self.end_headers()
+            return
+
+        if caminho == '/alterar_material':
+            material = next((item for item in banco_materiais if item.get('id') == valor('id') and item.get('ativo', True)), None)
+            nome = valor('nome').strip()
+            tipo = valor('tipo', 'material')
+            unidade = valor('unidade', 'm²')
+            try:
+                preco = float(valor('preco_unitario', '0') or '0')
+                preco_linear = float(valor('preco_linear', '0'))
+                largura_m = float(valor('largura_m', '0') or '0')
+            except ValueError:
+                preco = -1
+                preco_linear = -1
+                largura_m = -1
+            base = next((m for m in banco_materiais if m.get('id') == valor('material_base_id') and m.get('ativo', True)), None)
+            if base and unidade == 'm² + linear':
+                preco = float(base['preco_unitario'])
+            if material and nome and tipo in ('material', 'acabamento', 'servico') and preco >= 0 and preco_linear >= 0 and largura_m >= 0:
+                tipo_anterior = material.get('tipo', 'material')
+                vinculado = any(
+                    orcamento.get('material_id') == material['id']
+                    or any(item.get('material_id') == material['id'] or any(acab.get('acabamento_id') == material['id'] for acab in item.get('acabamentos', [])) for item in orcamento.get('itens', []))
+                    for orcamento in banco_orcamentos
+                )
+                if not vinculado or tipo == tipo_anterior:
+                    material.update({
+                        'tipo': tipo,
+                        'codigo': valor('codigo').strip(),
+                        'nome': nome,
+                        'categoria': valor('categoria', 'Geral').strip(),
+                        'unidade': 'm²' if tipo == 'material' else unidade if unidade in ('m²', 'metro linear', 'unidade', 'm² + linear') else 'm²',
+                        'preco_unitario': preco,
+                        'preco_linear': preco_linear,
+                        'material_base_id': base['id'] if base else '',
+                        'largura_m': largura_m,
+                        'permite_auxiliar': valor('permite_auxiliar') == '1',
+                    })
+                    registrar_auditoria(usuario, 'alterou', 'material', material['id'], nome)
+            redirecionar(self, '/materiais')
+            return
+
+        if caminho == '/excluir_material':
+            material = next((item for item in banco_materiais if item.get('id') == valor('id') and item.get('ativo', True)), None)
+            if material:
+                material['ativo'] = False
+                registrar_auditoria(usuario, 'excluiu', 'material', material['id'], material.get('nome', ''))
+            redirecionar(self, '/materiais')
+            return
+
+        if caminho == '/salvar_modelo_pdf':
+            def linhas_modelo(chave):
+                return [linha.strip() for linha in valor(chave).splitlines() if linha.strip()]
+
+            def cor_modelo(chave):
+                cor = valor(chave).strip()
+                return cor if len(cor) == 7 and cor.startswith('#') and all(c in '0123456789abcdefABCDEF' for c in cor[1:]) else MODELO_PDF_PADRAO[chave]
+
+            dados_geral['modelo_pdf'] = {
+                'cor_principal': cor_modelo('cor_principal'),
+                'cor_total': cor_modelo('cor_total'),
+                'titulo_orcamento': valor('titulo_orcamento').strip(),
+                'titulo_pedido': valor('titulo_pedido').strip(),
+                'texto_liberacao': valor('texto_liberacao').strip(),
+                'condicoes': linhas_modelo('condicoes'),
+                'acessorios': linhas_modelo('acessorios'),
+                'obra': linhas_modelo('obra'),
+                'confirmacao': valor('confirmacao').strip(),
+                'empresa': valor('empresa').strip(),
+                'cnpj': valor('cnpj').strip(),
+            }
+            registrar_auditoria(usuario, 'alterou', 'modelo_pdf', 'modelo', 'Modelo do PDF do orçamento')
+            redirecionar(self, '/gerencial')
+            return
+
+        if caminho == '/salvar_forma_pagamento':
+            nome = valor('nome').strip()
+            if nome and not any(item.get('nome', '').casefold() == nome.casefold() and item.get('ativo', True) for item in banco_formas_pagamento):
+                forma_id = novo_id('PAG')
+                banco_formas_pagamento.append({'id': forma_id, 'nome': nome, 'descricao': valor('descricao').strip(), 'ativo': True})
+                registrar_auditoria(usuario, 'criou', 'forma de pagamento', forma_id, nome)
+            redirecionar(self, '/financeiro')
+            return
+
+        if caminho == '/alterar_forma_pagamento':
+            forma = next((item for item in banco_formas_pagamento if item.get('id') == valor('id') and item.get('ativo', True)), None)
+            nome = valor('nome').strip()
+            if forma and nome:
+                forma.update({'nome': nome, 'descricao': valor('descricao').strip()})
+                registrar_auditoria(usuario, 'alterou', 'forma de pagamento', forma['id'], nome)
+            redirecionar(self, '/financeiro')
+            return
+
+        if caminho == '/excluir_forma_pagamento':
+            forma = next((item for item in banco_formas_pagamento if item.get('id') == valor('id') and item.get('ativo', True)), None)
+            if forma:
+                forma['ativo'] = False
+                registrar_auditoria(usuario, 'excluiu', 'forma de pagamento', forma['id'], forma.get('nome', ''))
+            redirecionar(self, '/financeiro')
+            return
+
+        if caminho == '/registrar_recebimento':
+            numero = valor('orcamento_numero')
+            orcamento = next((item for item in banco_orcamentos if item.get('numero') == numero), None)
+            forma = next((item for item in banco_formas_pagamento if item.get('id') == valor('forma_pagamento_id') and item.get('ativo', True)), None)
+            try:
+                quantia = round(float(valor('valor')), 2)
+            except ValueError:
+                quantia = 0
+            recebido = recebido_orcamento(numero)
+            saldo = round(float(orcamento.get('valor_total', 0)) - recebido, 2) if orcamento else 0
+            status_recebivel = ('Aprovado', 'Em produção', 'Concluído', 'Vendido')
+            if orcamento and orcamento.get('status') in status_recebivel and forma and 0 < quantia <= saldo:
+                recebimento_id = novo_id('REC')
+                recebimento = {
+                    'id': recebimento_id,
+                    'orcamento_numero': numero,
+                    'cliente_nome': orcamento.get('cliente_nome', ''),
+                    'descricao': valor('etapa', 'Pagamento parcial'),
+                    'forma_pagamento_id': forma['id'],
+                    'forma_pagamento_nome': forma['nome'],
+                    'valor': quantia,
+                    'data': valor('data') or datetime.now().date().isoformat(),
+                    'usuario_id': usuario['id'],
+                    'usuario_nome': usuario['nome'],
+                }
+                banco_recebimentos.append(recebimento)
+                registrar_auditoria(usuario, 'registrou recebimento', 'orçamento', numero, f'{moeda(quantia)} - {recebimento["descricao"]}')
+            redirecionar(self, '/historico')
+            return
+
+        if caminho == '/salvar_funcionario':
+            nome = valor('nome').strip()
+            login = valor('login').strip().casefold()
+            senha = valor('senha')
+            login_existe = any(item.get('login', '').casefold() == login for item in banco_usuarios)
+            if nome and login and len(senha) >= 10 and not login_existe:
+                funcionario_id = novo_id('USR')
+                permissoes = {rota: valor(f'permissao_{rota}', 'nenhum') for rota in ABAS}
+                permissoes = {rota: nivel if nivel in ('nenhum', 'visualizar', 'editar') else 'nenhum' for rota, nivel in permissoes.items()}
+                banco_usuarios.append({
+                    'id': funcionario_id,
+                    'nome': nome,
+                    'login': login,
+                    'senha_hash': criar_hash_senha(senha),
+                    'administrador': False,
+                    'permissoes': permissoes,
+                    'ativo': True,
+                })
+                registrar_auditoria(usuario, 'cadastrou funcionário', 'funcionário', funcionario_id, f'{nome} ({login})')
+            redirecionar(self, '/funcionarios')
+            return
+
+        if caminho == '/alterar_funcionario':
+            funcionario = next((item for item in banco_usuarios if item.get('id') == valor('id') and item.get('ativo', True)), None)
+            nome = valor('nome').strip()
+            login = valor('login').strip().casefold()
+            senha = valor('senha')
+            login_existe = any(item.get('id') != valor('id') and item.get('login', '').casefold() == login for item in banco_usuarios)
+            if funcionario and nome and login and not login_existe and (not senha or len(senha) >= 10):
+                funcionario.update({'nome': nome, 'login': login})
+                funcionario['permissoes'] = {
+                    rota: valor(f'permissao_{rota}', 'nenhum')
+                    if valor(f'permissao_{rota}', 'nenhum') in ('nenhum', 'visualizar', 'editar') else 'nenhum'
+                    for rota in ABAS
+                }
+                if senha:
+                    funcionario['senha_hash'] = criar_hash_senha(senha)
+                registrar_auditoria(usuario, 'alterou funcionário', 'funcionário', funcionario['id'], f'{nome} ({login})')
+            redirecionar(self, '/funcionarios')
+            return
+
+        if caminho == '/excluir_funcionario':
+            funcionario = next((item for item in banco_usuarios if item.get('id') == valor('id') and item.get('ativo', True)), None)
+            if funcionario and funcionario.get('id') != usuario.get('id'):
+                if not funcionario.get('administrador') or sum(1 for item in banco_usuarios if item.get('administrador') and item.get('ativo', True)) > 1:
+                    funcionario['ativo'] = False
+                    registrar_auditoria(usuario, 'desativou funcionário', 'funcionário', funcionario['id'], funcionario.get('nome', ''))
+                    for token, usuario_id in list(SESSOES.items()):
+                        if usuario_id == funcionario['id']:
+                            SESSOES.pop(token, None)
+            redirecionar(self, '/funcionarios')
+            return
+
+        if caminho == '/alterar_orcamento':
+            numero = valor('numero')
+            orcamento = next((item for item in banco_orcamentos if item.get('numero') == numero and item.get('ativo', True)), None)
+            try:
+                entrada_valor = round(float(valor('entrada_valor', orcamento.get('entrada_valor', 0) if orcamento else 0)), 2)
+                prazo_entrega_dias = int(valor('prazo_entrega_dias', orcamento.get('prazo_entrega_dias', 6) if orcamento else 6))
+            except ValueError:
+                entrada_valor = -1
+                prazo_entrega_dias = 0
+            if orcamento and 0 <= entrada_valor <= float(orcamento.get('valor_total', 0)) and prazo_entrega_dias > 0:
+                total = float(orcamento.get('valor_total', 0))
+                saldo = round(total - entrada_valor, 2)
+                data_orcamento = datetime.strptime(orcamento.get('data', datetime.now().date().isoformat()), '%Y-%m-%d').date()
+                orcamento['observacoes'] = valor('observacoes', '').strip()
+                orcamento['entrada_valor'] = entrada_valor
+                orcamento['entrada_percentual'] = round(entrada_valor * 100 / total, 2) if total else 0
+                orcamento['prazo_entrega_dias'] = prazo_entrega_dias
+                orcamento['parcelas_previstas'] = [
+                    {'etapa': 'Entrada', 'valor': entrada_valor, 'data_prevista': data_orcamento.isoformat()},
+                    {'etapa': 'Entrega do material', 'valor': saldo, 'data_prevista': (data_orcamento + timedelta(days=prazo_entrega_dias)).isoformat()},
+                ]
+                orcamento['revisao'] = int(orcamento.get('revisao', 0)) + 1
+                orcamento['revisado_por'] = usuario['nome']
+                orcamento['revisado_em'] = datetime.now().isoformat(timespec='seconds')
+                registrar_auditoria(usuario, 'revisou orçamento', 'orçamento', numero, f"Revisão {orcamento['revisao']}")
+            redirecionar(self, '/historico')
+            return
+
+        if caminho == '/aprovar_orcamento':
+            numero = valor('numero')
+            orcamento = next((item for item in banco_orcamentos if item.get('numero') == numero and item.get('ativo', True)), None)
+            if orcamento and orcamento.get('status', 'Em análise') == 'Em análise':
+                orcamento['status'] = 'Em produção'
+                orcamento['aprovado'] = True
+                orcamento['aprovado_por'] = usuario['nome']
+                orcamento['aprovado_em'] = datetime.now().isoformat(timespec='seconds')
+                registrar_auditoria(usuario, 'aprovou e iniciou produção', 'orçamento', numero)
+            redirecionar(self, '/historico')
+            return
+
+        if caminho == '/concluir_orcamento':
+            numero = valor('numero')
+            orcamento = next((item for item in banco_orcamentos if item.get('numero') == numero and item.get('ativo', True)), None)
+            if orcamento and orcamento.get('status') == 'Em produção':
+                orcamento['status'] = 'Concluído'
+                orcamento['concluido_por'] = usuario['nome']
+                orcamento['concluido_em'] = datetime.now().isoformat(timespec='seconds')
+                registrar_auditoria(usuario, 'concluiu orçamento', 'orçamento', numero)
+            redirecionar(self, '/historico')
+            return
+
+        if caminho == '/excluir_orcamento':
+            numero = valor('numero')
+            orcamento = next((item for item in banco_orcamentos if item.get('numero') == numero and item.get('ativo', True)), None)
+            if orcamento:
+                orcamento['ativo'] = False
+                orcamento['status'] = 'Cancelado'
+                registrar_auditoria(usuario, 'arquivou orçamento', 'orçamento', numero)
+            redirecionar(self, '/historico')
+            return
+
+        if caminho == '/salvar_orcamento':
+            numero_novo = ''
+            cliente_id = valor('cliente_id')
+            cliente = next((item for item in banco_clientes if item['id'] == cliente_id), None)
+
+            itens = []
+            valor_total = 0.0
+            try:
+                materiais_ids = dados.get('item_material_id', [])
+                descricoes = dados.get('item_descricao', [])
+                comprimentos = dados.get('item_comprimento', [])
+                larguras = dados.get('item_largura', [])
+                observacoes_itens = dados.get('item_observacao', [])
+                quantidades_pecas = dados.get('item_quantidade_pecas', [])
+                
+                if not (len(materiais_ids) == len(descricoes) == len(comprimentos) == len(larguras)):
+                    raise ValueError('Itens incompletos')
+
+                for indice, material_id in enumerate(materiais_ids):
+                    material = next((item for item in banco_materiais if item['id'] == material_id and item.get('ativo', True) and (item.get('tipo', 'material') == 'material' or (item.get('tipo') == 'acabamento' and item.get('unidade') == 'm² + linear'))), None)
+                    comprimento = float(comprimentos[indice])
+                    largura = float(larguras[indice])
+                    descricao = descricoes[indice].strip()
+                    observacao_item = observacoes_itens[indice].strip() if indice < len(observacoes_itens) else ''
+                    qtd_pecas = int(quantidades_pecas[indice]) if indice < len(quantidades_pecas) and quantidades_pecas[indice] else 1
+                    
+                    if not material or not descricao or comprimento <= 0 or largura <= 0 or qtd_pecas < 1:
+                        raise ValueError('Item inválido')
+
+                    item_combinado = material.get('tipo') == 'acabamento' and material.get('unidade') == 'm² + linear'
+                    if item_combinado:
+                        largura = float(material.get('largura_m', 0) or 0)
+                        if largura <= 0 or float(material.get('preco_linear', 0) or 0) < 0:
+                            raise ValueError('Largura ou preço linear inválido no cadastro do acabamento')
+                    area = comprimento * largura
+                    preco_material = preco_m2_acabamento(material) if item_combinado else float(material['preco_unitario'])
+                    preco_linear_item = float(material.get('preco_linear', 0) or 0) if item_combinado else 0
+                    material_base = next((base for base in banco_materiais if base.get('id') == material.get('material_base_id') and base.get('ativo', True)), {}) if item_combinado else {}
+                    total_item = (area * preco_material + comprimento * preco_linear_item) * qtd_pecas
+                    acabamentos = []
+                    acabamentos_ids = dados.get(f'acabamento_id_{indice}', [])
+                    acabamentos_descricoes = dados.get(f'acabamento_descricao_{indice}', [])
+                    acabamentos_quantidades = dados.get(f'acabamento_quantidade_{indice}', [])
+                    acabamentos_larguras = dados.get(f'acabamento_largura_{indice}', [])
+                    acabamentos_aux = dados.get(f'acabamento_aux_{indice}', [])
+                    
+                    if not (len(acabamentos_ids) == len(acabamentos_descricoes) == len(acabamentos_quantidades) == len(acabamentos_larguras)):
+                        raise ValueError('Acabamentos incompletos')
+
+                    for posicao_acabamento, (acabamento_id, detalhe, medida_texto, largura_texto) in enumerate(zip(acabamentos_ids, acabamentos_descricoes, acabamentos_quantidades, acabamentos_larguras)):
+                        acabamento = next((item for item in banco_materiais if item['id'] == acabamento_id and item.get('tipo') in ('acabamento', 'servico')), None)
+                        medida = float(medida_texto)
+                        largura_acabamento = float(largura_texto)
+                        detalhe = detalhe.strip()
+                        if not acabamento or not detalhe or medida <= 0:
+                            raise ValueError('Acabamento inválido')
+                        
+                        unidade = acabamento.get('unidade', 'metro linear')
+                        preco_unitario = preco_m2_acabamento(acabamento)
+                        preco_linear = float(acabamento.get('preco_linear', 0))
+                        largura_cadastrada = float(acabamento.get('largura_m', 0) or 0)
+                        registro_acabamento = {
+                            'acabamento_id': acabamento['id'],
+                            'nome': acabamento['nome'],
+                            'descricao': detalhe,
+                            'unidade': unidade,
+                            'preco_unitario': preco_unitario,
+                            'medida': medida,
+                            'largura_m': largura_acabamento,
+                            'auxiliar': posicao_acabamento < len(acabamentos_aux) and acabamentos_aux[posicao_acabamento] == '1',
+                            'quantidade_pecas': qtd_pecas
+                        }
+                        
+                        if unidade == 'm² + linear':
+                            if largura_cadastrada <= 0 or preco_linear < 0:
+                                raise ValueError('Largura da faixa ou tarifa linear inválida no cadastro')
+                            quantidade_m2 = medida * largura_cadastrada
+                            subtotal_m2 = quantidade_m2 * preco_unitario
+                            subtotal_linear = medida * preco_linear
+                            subtotal = (subtotal_m2 + subtotal_linear) * qtd_pecas
+                            registro_acabamento.update({
+                                'quantidade': medida,
+                                'quantidade_m2': quantidade_m2,
+                                'quantidade_linear': medida,
+                                'altura_m': largura_cadastrada,
+                                'preco_linear': preco_linear,
+                                'valor_m2': subtotal_m2 * qtd_pecas,
+                                'valor_linear': subtotal_linear * qtd_pecas,
+                            })
+                        else:
+                            if unidade == 'm²' and largura_acabamento <= 0:
+                                raise ValueError('Largura de acabamento inválida')
+                            quantidade_acabamento = medida * largura_acabamento if unidade == 'm²' else medida
+                            subtotal = quantidade_acabamento * preco_unitario * qtd_pecas
+                            registro_acabamento['quantidade'] = quantidade_acabamento
+                        
+                        registro_acabamento['valor_total'] = subtotal
+                        acabamentos.append(registro_acabamento)
+                        total_item += subtotal
+
+                    itens.append({
+                        'descricao': descricao,
+                        'observacao_item': observacao_item,
+                        'material_id': material['id'],
+                        'material_nome': material['nome'],
+                        'comprimento': comprimento,
+                        'largura': largura,
+                        'area_m2': area,
+                        'preco_material_m2': preco_material,
+                        'valor_material': area * preco_material * qtd_pecas,
+                        'unidade_principal': 'm² + linear' if item_combinado else 'm²',
+                        'material_base_nome': material_base.get('nome', ''),
+                        'preco_linear_principal': preco_linear_item,
+                        'valor_linear_principal': comprimento * preco_linear_item * qtd_pecas,
+                        'acabamentos': acabamentos,
+                        'quantidade_pecas': qtd_pecas,
+                        'valor_total': total_item,
+                    })
+                    valor_total += total_item
+            except (ValueError, TypeError) as e:
+                print("ERRO NO ORÇAMENTO:", e)
+                itens = []
+                
+            forma_id = valor('forma_pagamento_id')
+            forma_pagamento = next((item for item in banco_formas_pagamento if item.get('id') == forma_id and item.get('ativo', True)), None)
+            try:
+                entrada_valor = round(float(valor('entrada_valor', '0')), 2)
+                prazo_entrega_dias = int(valor('prazo_entrega_dias', '6'))
+                desconto_percentual = float(valor('desconto_percentual', '0'))
+                gordura_percentual = float(valor('gordura_percentual', '0'))
+            except ValueError:
+                entrada_valor = -1
+                prazo_entrega_dias = 0
+                desconto_percentual = -1
+                gordura_percentual = -1
+            if not (0 <= desconto_percentual <= 100 and 0 <= gordura_percentual <= 100):
+                itens = []
+            subtotal_itens = round(valor_total, 2)
+            for item in itens:
+                item['valor_total_com_gordura'] = round(float(item['valor_total']) * (1 + gordura_percentual / 100), 2)
+            subtotal_com_gordura = round(sum(float(item.get('valor_total_com_gordura', item['valor_total'])) for item in itens), 2)
+            desconto_valor = round(subtotal_com_gordura * desconto_percentual / 100, 2)
+            total_final = round(subtotal_com_gordura - desconto_valor, 2)
+            if cliente and itens and forma_pagamento and 0 <= entrada_valor <= total_final and prazo_entrega_dias > 0:
+                numero_edicao = valor('orcamento_numero').strip()
+                orcamento_existente = next((o for o in banco_orcamentos if o.get('numero') == numero_edicao and o.get('ativo', True)), None)
+                numero = orcamento_existente['numero'] if orcamento_existente else novo_numero_orcamento()
+                numero_novo = numero
+                primeiro_item = itens[0]
+                nomes_materiais = ', '.join(dict.fromkeys(item['material_nome'] for item in itens))
+                valor_entrega = round(total_final - entrada_valor, 2)
+                data_orcamento = datetime.now().date()
+                dados_orcamento = {
+                    "numero": numero,
+                    "cliente_nome": cliente['nome'],
+                    "cliente_id": cliente['id'],
+                    "cliente_telefone": cliente.get('telefone', ''),
+                    "cliente_endereco": cliente.get('endereco', cliente.get('cidade', '')),
+                    "vendedor_id": usuario['id'],
+                    "vendedor": usuario['nome'],
+                    "forma_pagamento_id": forma_pagamento['id'],
+                    "forma_pagamento_nome": forma_pagamento['nome'],
+                    "entrada_valor": entrada_valor,
+                    "entrada_percentual": round(entrada_valor * 100 / total_final, 2) if total_final else 0,
+                    "prazo_entrega_dias": prazo_entrega_dias,
+                    "subtotal_itens": subtotal_itens,
+                    "gordura_percentual": gordura_percentual,
+                    "subtotal_com_gordura": subtotal_com_gordura,
+                    "desconto_percentual": desconto_percentual,
+                    "desconto_valor": desconto_valor,
+                    "parcelas_previstas": [
+                        {'etapa': 'Entrada', 'valor': entrada_valor, 'data_prevista': data_orcamento.isoformat()},
+                        {'etapa': 'Entrega do material', 'valor': valor_entrega, 'data_prevista': (data_orcamento + timedelta(days=prazo_entrega_dias)).isoformat()},
+                    ],
+                    "material_nome": nomes_materiais,
+                    "material_id": primeiro_item['material_id'],
+                    "itens": itens,
+                    "quantidade": sum(item['area_m2'] * item.get('quantidade_pecas', 1) for item in itens),
+                    "unidade": 'm²',
+                    "largura": primeiro_item['comprimento'],
+                    "altura": primeiro_item['largura'],
+                    "observacoes": valor('observacoes', ''),
+                    "valor_total": total_final,
+                    "status": orcamento_existente.get('status', 'Em análise') if orcamento_existente else "Em análise",
+                    "data": orcamento_existente.get('data', data_orcamento.isoformat()) if orcamento_existente else data_orcamento.isoformat()
+                }
+                if orcamento_existente:
+                    dados_orcamento['revisao'] = int(orcamento_existente.get('revisao', 0)) + 1
+                    dados_orcamento['revisado_por'] = usuario['nome']
+                    dados_orcamento['revisado_em'] = datetime.now().isoformat(timespec='seconds')
+                    orcamento_existente.update(dados_orcamento)
+                    registrar_auditoria(usuario, 'revisou orçamento e itens', 'orçamento', numero, f"Revisão {dados_orcamento['revisao']} - {cliente['nome']} - {moeda(total_final)}")
+                else:
+                    banco_orcamentos.append(dados_orcamento)
+                    registrar_auditoria(usuario, 'criou', 'orçamento', numero, f'{cliente["nome"]} - {moeda(total_final)}')
+
+            self.send_response(303)
+            self.send_header('Location', '/orcamentos' + (f'?sucesso=1&baixar={numero_novo}' if numero_novo else ''))
+            self.end_headers()
+            return
+
+        self.send_response(404)
+        self.end_headers()
+
+if __name__ == '__main__':
+    endereco = ('0.0.0.0', 5000)
+    servidor = ThreadingHTTPServer(endereco, MeuServidor)
+    servidor.daemon_threads = True
+    print("Sistema profissional de marmoraria online na porta 5000...")
+    servidor.serve_forever()
