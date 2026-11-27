@@ -23,14 +23,19 @@ PDF_DIR = os.path.join(BASE_DIR, "PDF_Orcamentos")
 LOGO_FILE = os.path.join(BASE_DIR, "logo.png")
 os.makedirs(PDF_DIR, exist_ok=True)
 
-# --- CONEXÃO COM O FIREBASE ---
-if 'FIREBASE_CREDENTIALS' in os.environ:
-    cred = credentials.Certificate(json.loads(os.environ['FIREBASE_CREDENTIALS']))
-    if not firebase_admin._apps:
-        firebase_admin.initialize_app(cred)
-    db = firestore.client()
-else:
-    db = None
+# --- CONEXÃO COM O FIREBASE (VIA ARQUIVO JSON NO GITHUB) ---
+db = None
+try:
+    if os.path.exists('firebase-key.json'):
+        cred = credentials.Certificate('firebase-key.json')
+        if not firebase_admin._apps:
+            firebase_admin.initialize_app(cred)
+        db = firestore.client()
+        print("Conectado ao Firebase via arquivo JSON!")
+    else:
+        print("ERRO CRÍTICO: Arquivo firebase-key.json não encontrado na raiz do projeto!")
+except Exception as e:
+    print(f"ERRO AO CONECTAR NO FIREBASE: {e}")
 
 def carregar_dados():
     if not db:
@@ -57,6 +62,7 @@ def carregar_dados():
 
 def salvar_dados():
     if not db:
+        print("Tentativa de salvar, mas o Firebase não está conectado.")
         return
     try:
         db.collection('sistema').document('dados_gerais').set(dados_geral)
@@ -104,6 +110,14 @@ MODELO_PDF_PADRAO = {
         '8 - Frete por conta do cliente - não incluso no valor da marmoraria.',
     ],
     'acessorios': [
+        'Cubas, lixeiras, calha úmida, torre de tomadas e manual de churrasqueiras ou cooktop.',
+        'Porcelanatos deverão ser entregues na marmoraria pelo cliente ou responsável pela obra.',
+    ],
+    'obra': ['Caso a obra necessite de acabamento em esquadria na bancada ou fechamentos, deverá ser agendado.'],
+    'confirmacao': 'Confirmo que li as informações acima e concordo com a execução do serviço.',
+    'empresa': 'CATALÃO MÁRMORES E GRANITOS',
+    'cnpj': 'CNPJ: 10.446.296/0001-22',
+}
         'Cubas, lixeiras, calha úmida, torre de tomadas e manual de churrasqueiras ou cooktop.',
         'Porcelanatos deverão ser entregues na marmoraria pelo cliente ou responsável pela obra.',
     ],
