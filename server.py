@@ -2652,9 +2652,9 @@ class MeuServidor(SimpleHTTPRequestHandler):
         self.end_headers()
         
     if __name__ == '__main__':
-    porta = int(os.environ.get('PORT', 5000))
-    endereco = ('0.0.0.0', porta)
-    servidor = ThreadingHTTPServer(endereco, MeuServidor)
-    servidor.daemon_threads = True
-    print(f"Sistema online na porta {porta}...")
-    servidor.serve_forever()
+        porta = int(os.environ.get('PORT', 5000))
+        endereco = ('0.0.0.0', porta)
+        servidor = ThreadingHTTPServer(endereco, MeuServidor)
+        servidor.daemon_threads = True
+        print(f"Sistema online na porta {porta}...")
+        servidor.serve_forever()
