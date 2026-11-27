@@ -26,7 +26,7 @@ os.makedirs(PDF_DIR, exist_ok=True)
 # --- CONEXÃO COM O FIREBASE (VIA ARQUIVO JSON NO GITHUB) ---
 db = None
 try:
-    if os.path.exists('firebase-key.json'):
+    if os.path.exists(os.path.join(BASE_DIR, 'firebase-key.json')):
         cred = credentials.Certificate('firebase-key.json')
         if not firebase_admin._apps:
             firebase_admin.initialize_app(cred)
