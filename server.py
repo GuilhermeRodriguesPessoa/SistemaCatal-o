@@ -27,7 +27,7 @@ os.makedirs(PDF_DIR, exist_ok=True)
 db = None
 try:
     if os.path.exists(os.path.join(BASE_DIR, 'firebase-key.json')):
-        cred = credentials.Certificate('firebase-key.json')
+        cred = credentials.Certificate(os.path.join(BASE_DIR, 'firebase-key.json'))
         if not firebase_admin._apps:
             firebase_admin.initialize_app(cred)
         db = firestore.client()
