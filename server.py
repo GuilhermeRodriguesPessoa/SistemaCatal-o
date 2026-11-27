@@ -23,21 +23,20 @@ PDF_DIR = os.path.join(BASE_DIR, "PDF_Orcamentos")
 LOGO_FILE = os.path.join(BASE_DIR, "logo.png")
 os.makedirs(PDF_DIR, exist_ok=True)
 
-# --- CONEXÃO COM O FIREBASE (VIA VARIÁVEL DE AMBIENTE) ---
+# --- CONEXÃO COM O FIREBASE (CHAVE DIRETO NO CÓDIGO) ---
 db = None
 try:
-    # Pega o JSON da variável de ambiente configurada no Render
-    credenciais_json = os.environ.get('FIREBASE_CREDENTIALS')
-    
+    # O JSON em uma única linha foi colado aqui embaixo:
+    credenciais_json = """{"type": "service_account", "project_id": "sistema-catalao", "private_key_id": "8047f6da7b0ee023fe65221672a1e26758a2314f", "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDO0BFqOOQE3AlI\nCLC/e9hCdyR3mqe6XtYoYrgUYRvGNQg/3PufXq7dnlONTpSP7eBwstSx0UuDc9ja\np7yYI1Bqe/s6EEf72pS3IV3udTytMJGTCzjy/S3/dS5AWoMdVGBQhvePy4w00ldE\nMtM/tegOqWkNL5SDFsGnZAyg3bs7HTEh/Yj7cvheteUnGVtl7fP1kMSzJN3YlsiD\n1sifMlndrIBx0S29evEcGa/nmczRrvgmgMLTaVpLYoPDru25HelaD28G9joX4Mwe\nHisbdl9iO9F6m/Rk+mAQsg4yOsw1jcjp+iGW6rAfVvwxqvZvfKhFc1LLmtA0o6C+\n+k7iTmN9AgMBAAECggEACECHIVzpxEPfXu9x1gIkC+rjGp6iKK6WDwB5Zd7GE++T\nx7CSnbZSdedWYCINjXypYvXPxNScFb+unHLq9IscL1OJH7T8mlELdA8xx00IQcTZ\nWiutdwyhJDtRwCGcb7QpL61i/WraylTGRKNeiIFCpCsgVPVcEKr8ySgV1OlkCiS6\noWEpRiyBE4KCwl8iBSvnfrme8U+D0edRjHKQtzaa4BZOhM5Kdz1I+kTACxBuuRKE\nE4EDkzMFdml0Esri8qf3K3GH/cnNiqmt/5fPndOveyTrMOXKQJuAzVCSdmBa5xET\nm8Em4h1aFguuzFEUWL5I0spDVVYNNdFwWuL3L80fIQKBgQD4i7+QKwxDv+f+nWrS\ngebetxvR08E0eiYOdVkPuLJmABmmc1VeFWx2pnE0Zhy1fU2nNmswx6qo4I18uan/\nHXOXZy2M7A8K4dovfLNYeptpPCeUvt5xuONg6Rddn8ZkSu3b3q3XY1AiLbppfFh7\nqhiqBXZxLHCMq2UMl/guTm7MZQKBgQDVA+gmf8GHfRICpUyZgN2bfye9n50dPNkj\napnNevpQmpgtMf73WcN33C7EKdMQuJpgHCEERT/zKVjx3o6Zra/RwwpFooKctj+4\nA9J5k+dEMGq+whr8tedH6Ono9zVVRlsi52SznDt6ITZJSSiDy38OGhfjhWFskU5r\nyXxLk77NOQKBgFl2xB96v1FrtHA77YWUaKvmMUdX94WSKjyuFL7J9r0scA8wGJxj\nDcWvp7P6xX62ecsklXTbihx7p7Irintf+ImZBBZjqg56uXS6aDwC9gntMzohciRx\nLrdlb5mtt1XGetPX1a9f+iozV5Q8xATPd01L5hRasLCRyS+9TAIvDUbZAoGBAKGu\nEHPAPlUnQhdN/cD5RbrznWdZEfiSKcGu9MQ41mt9m4maTArUT//W2Iw9rp0fcNUI\nJKtIIIzg0kjrAtN0OGH/JvnJqldmISD7jbKH514jXbIiRDeRndU/3OLdV9a8ywnI\nFfAZ4i8FrF2dsKmwOGSsu3sOzu6Hr70yNixrHMRJAoGAS0FGKl4aagFiH8CGZ0UA\nrcL4YAwWn2Lyn/MHhvLLrxkSoB4Z/YYIIW9fmqmzpkZFDNFEstv5jNcid8HZ2P6O\nuctORnyG+tN1O9Uj7c2p7ntbgLboCK6EYs4BEDdcpGYYwPcBTgJw/N1227t9nAGh\nhVQn+dYtMm+B8EFQW7h2d4g=\n-----END PRIVATE KEY-----\n", "client_email": "firebase-adminsdk-fbsvc@sistema-catalao.iam.gserviceaccount.com", "client_id": "115000208395599731586", "auth_uri": "https://accounts.google.com/o/oauth2/auth", "token_uri": "https://oauth2.googleapis.com/token", "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs", "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40sistema-catalao.iam.gserviceaccount.com", "universe_domain": "googleapis.com"}"""
+
     if credenciais_json:
-        # Carrega a credencial a partir do texto JSON
         cred = credentials.Certificate(json.loads(credenciais_json))
         if not firebase_admin._apps:
             firebase_admin.initialize_app(cred)
         db = firestore.client()
-        print("Conectado ao Firebase via Variável de Ambiente!")
+        print("Conectado ao Firebase com sucesso (chave no código)!")
     else:
-        print("ERRO CRÍTICO: Variável FIREBASE_CREDENTIALS não encontrada no Render.")
+        print("ERRO: Chave do Firebase não encontrada no código.")
 except Exception as e:
     print(f"ERRO AO CONECTAR NO FIREBASE: {e}")
 
