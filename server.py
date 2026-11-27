@@ -118,14 +118,6 @@ MODELO_PDF_PADRAO = {
     'empresa': 'CATALÃO MÁRMORES E GRANITOS',
     'cnpj': 'CNPJ: 10.446.296/0001-22',
 }
-        'Cubas, lixeiras, calha úmida, torre de tomadas e manual de churrasqueiras ou cooktop.',
-        'Porcelanatos deverão ser entregues na marmoraria pelo cliente ou responsável pela obra.',
-    ],
-    'obra': ['Caso a obra necessite de acabamento em esquadria na bancada ou fechamentos, deverá ser agendado.'],
-    'confirmacao': 'Confirmo que li as informações acima e concordo com a execução do serviço.',
-    'empresa': 'CATALÃO MÁRMORES E GRANITOS',
-    'cnpj': 'CNPJ: 10.446.296/0001-22',
-}
 
 def modelo_pdf():
     salvo = dados_geral.get('modelo_pdf') or {}
