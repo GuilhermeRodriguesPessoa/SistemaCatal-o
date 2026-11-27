@@ -22,15 +22,28 @@ import base64
 # --- CONEXÃO FORÇADA COM O FIREBASE ---
 db = None
 try:
-    if os.path.exists('firebase-key.json'):
-        cred = credentials.Certificate('firebase-key.json')
+    caminhos = [
+        '/etc/secrets/firebase-key.json',
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), 'firebase-key.json'),
+        'firebase-key.json',
+    ]
+    chave_env = os.environ.get('FIREBASE_KEY')
+    caminho = next((c for c in caminhos if os.path.exists(c)), None)
+
+    if chave_env:
+        cred = credentials.Certificate(json.loads(chave_env))
+    elif caminho:
+        cred = credentials.Certificate(caminho)
+    else:
+        cred = None
+        print("❌ Nenhuma credencial do Firebase encontrada.", flush=True)
+
+    if cred:
         firebase_admin.initialize_app(cred)
         db = firestore.client()
-        print("✅ SUCESSO: Conectado ao Firebase via arquivo firebase-key.json!")
-    else:
-        print("❌ ERRO: Arquivo firebase-key.json NÃO ENCONTRADO na raiz.")
+        print("✅ Conectado ao Firebase!", flush=True)
 except Exception as e:
-    print(f"❌ ERRO AO CONECTAR NO FIREBASE: {e}")
+    print(f"❌ ERRO AO CONECTAR NO FIREBASE: {e}", flush=True)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, "dados_marmoraria.json")
