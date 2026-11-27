@@ -1,0 +1,4074 @@
+{
+  "clientes": [
+    {
+      "id": "CLI-0001",
+      "nome": "João Aguilar",
+      "telefone": "31996573382",
+      "cidade": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "observacoes": "Casa 2",
+      "endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,"
+    },
+    {
+      "id": "CLI-DA848D0819",
+      "nome": "Guilherme Rodrigues Pessoa",
+      "telefone": "319999999",
+      "endereco": "Rua pirajuri",
+      "observacoes": "",
+      "ativo": true
+    },
+    {
+      "id": "CLI-7B246E0A76",
+      "nome": "Maria José Rodrigues",
+      "telefone": "31 99202-1334",
+      "endereco": "Rua Pirajuí, n° 319, apto 14, São Caetano - Betim/MG",
+      "observacoes": "Em frente ao Lava-jato Express",
+      "ativo": true
+    }
+  ],
+  "materiais": [
+    {
+      "id": "MAT-0001",
+      "codigo": "0001",
+      "nome": "Granito Verde Ubatuba",
+      "categoria": "Granitos",
+      "unidade": "m²",
+      "preco_unitario": 520.0,
+      "tipo": "material"
+    },
+    {
+      "id": "MAT-0002",
+      "tipo": "acabamento",
+      "codigo": "1010",
+      "nome": "Acabamento Reto",
+      "categoria": "Acabamentos Simples",
+      "unidade": "metro linear",
+      "preco_unitario": 20.0
+    },
+    {
+      "id": "MAT-0003",
+      "tipo": "material",
+      "codigo": "2020",
+      "nome": "Granito Preto São Gabriel",
+      "categoria": "Granitos",
+      "unidade": "m²",
+      "preco_unitario": 600.0
+    },
+    {
+      "id": "MAT-0004",
+      "tipo": "servico",
+      "codigo": "3030",
+      "nome": "Furo Cuba faceado",
+      "categoria": "Furos",
+      "unidade": "unidade",
+      "preco_unitario": 280.0
+    },
+    {
+      "id": "MAT-5BBD0505F4",
+      "tipo": "servico",
+      "codigo": "3030",
+      "nome": "Rebaixo Italiano",
+      "categoria": "Rebaixos",
+      "unidade": "metro linear",
+      "preco_unitario": 350.0,
+      "ativo": true
+    },
+    {
+      "id": "MAT-0D7B662D59",
+      "tipo": "acabamento",
+      "codigo": "1010",
+      "nome": "Rodopia Verde Ubatuba 10 CM",
+      "categoria": "Rodopias",
+      "unidade": "m²",
+      "preco_unitario": 520.0,
+      "preco_linear": 120.0,
+      "ativo": false
+    },
+    {
+      "id": "MAT-1C8DA3E645",
+      "tipo": "acabamento",
+      "codigo": "1010",
+      "nome": "Rodopia Verde Ubatuba 10 CM",
+      "categoria": "Rodopias",
+      "unidade": "m² + linear",
+      "preco_unitario": 520.0,
+      "preco_linear": 120.0,
+      "material_base_id": "MAT-0001",
+      "largura_m": 0.1,
+      "ativo": true,
+      "permite_auxiliar": true
+    },
+    {
+      "id": "MAT-A0BD73F260",
+      "tipo": "material",
+      "codigo": "1011",
+      "nome": "Rodopia Verde Ubatuba 27CM",
+      "categoria": "Rodopias",
+      "unidade": "m²",
+      "preco_unitario": 520.0,
+      "preco_linear": 120.0,
+      "material_base_id": "MAT-0001",
+      "largura_m": 27.0,
+      "permite_auxiliar": true,
+      "ativo": false
+    },
+    {
+      "id": "MAT-69015EAB18",
+      "tipo": "acabamento",
+      "codigo": "1010",
+      "nome": "Rodopia Verde Ubatuba 27CM",
+      "categoria": "Rodopias",
+      "unidade": "m² + linear",
+      "preco_unitario": 520.0,
+      "preco_linear": 120.0,
+      "material_base_id": "MAT-0001",
+      "largura_m": 0.27,
+      "permite_auxiliar": true,
+      "ativo": true
+    },
+    {
+      "id": "MAT-1BBCF40A58",
+      "tipo": "acabamento",
+      "codigo": "1012",
+      "nome": "Rodopia Verde Ubatuba 5 CM",
+      "categoria": "Rodopias",
+      "unidade": "m² + linear",
+      "preco_unitario": 600.0,
+      "preco_linear": 120.0,
+      "material_base_id": "MAT-0003",
+      "largura_m": 0.05,
+      "permite_auxiliar": true,
+      "ativo": true
+    },
+    {
+      "id": "MAT-AD7CE556AC",
+      "tipo": "material",
+      "codigo": "2021",
+      "nome": "Granito Preto Negresco",
+      "categoria": "Granitos",
+      "unidade": "m²",
+      "preco_unitario": 420.0,
+      "preco_linear": 0.0,
+      "material_base_id": "",
+      "largura_m": 0.0,
+      "permite_auxiliar": false,
+      "ativo": true
+    },
+    {
+      "id": "MAT-D0A407ECB6",
+      "tipo": "acabamento",
+      "codigo": "1013",
+      "nome": "Meia Esquadrilha",
+      "categoria": "Acabamentos Simples",
+      "unidade": "metro linear",
+      "preco_unitario": 100.0,
+      "preco_linear": 0.0,
+      "material_base_id": "",
+      "largura_m": 0.0,
+      "permite_auxiliar": true,
+      "ativo": true
+    },
+    {
+      "id": "MAT-BAA8B23744",
+      "tipo": "acabamento",
+      "codigo": "1050",
+      "nome": "Rodapé 10 CM Verde ubatúba",
+      "categoria": "Rodapé",
+      "unidade": "m² + linear",
+      "preco_unitario": 520.0,
+      "preco_linear": 90.0,
+      "material_base_id": "MAT-0001",
+      "largura_m": 0.1,
+      "permite_auxiliar": true,
+      "ativo": true
+    }
+  ],
+  "orcamentos": [
+    {
+      "numero": "ORC-20261015093627",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "material_nome": "Granito Vede Ubatuba",
+      "material_id": "MAT-0001",
+      "quantidade": 1.0,
+      "unidade": "m²",
+      "largura": 0.6,
+      "altura": 1.6,
+      "observacoes": "bancada com acabamento e x",
+      "valor_total": 520.0,
+      "status": "Cancelado",
+      "data": "2026-10-15",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261015101018",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "material_nome": "Granito Vede Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Vede Ubatuba",
+          "comprimento": 4.0,
+          "largura": 0.6,
+          "area_m2": 2.4,
+          "preco_material_m2": 520.0,
+          "valor_material": 1248.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Frente e Fundo",
+              "quantidade": 8.0,
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "valor_total": 160.0
+            }
+          ],
+          "valor_total": 1408.0
+        }
+      ],
+      "quantidade": 2.4,
+      "unidade": "m²",
+      "largura": 4.0,
+      "altura": 0.6,
+      "observacoes": "",
+      "valor_total": 1408.0,
+      "status": "Cancelado",
+      "data": "2026-10-15",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261015101939",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "material_nome": "Granito Vede Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Vede Ubatuba",
+          "comprimento": 2.5,
+          "largura": 0.6,
+          "area_m2": 1.5,
+          "preco_material_m2": 520.0,
+          "valor_material": 780.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0004",
+              "nome": "Furo Cuba faceado",
+              "descricao": "Furo Cuba",
+              "quantidade": 1.0,
+              "unidade": "unidade",
+              "preco_unitario": 280.0,
+              "valor_total": 280.0
+            }
+          ],
+          "valor_total": 1060.0
+        }
+      ],
+      "quantidade": 1.5,
+      "unidade": "m²",
+      "largura": 2.5,
+      "altura": 0.6,
+      "observacoes": "",
+      "valor_total": 1060.0,
+      "status": "Cancelado",
+      "data": "2026-10-15",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261015105154",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "material_nome": "Granito Preto São Gabriel",
+      "material_id": "MAT-0003",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 5.0,
+          "largura": 0.65,
+          "area_m2": 3.25,
+          "preco_material_m2": 600.0,
+          "valor_material": 1950.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0004",
+              "nome": "Furo Cuba faceado",
+              "descricao": "Furo cuba",
+              "quantidade": 1.0,
+              "unidade": "unidade",
+              "preco_unitario": 280.0,
+              "valor_total": 280.0
+            }
+          ],
+          "valor_total": 2230.0
+        }
+      ],
+      "quantidade": 3.25,
+      "unidade": "m²",
+      "largura": 5.0,
+      "altura": 0.65,
+      "observacoes": "Prazo 15 dias",
+      "valor_total": 2230.0,
+      "status": "Cancelado",
+      "data": "2026-10-15",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261015135317",
+      "cliente_nome": "Guilherme Rodrigues Pessoa",
+      "cliente_id": "CLI-DA848D0819",
+      "cliente_telefone": "319999999",
+      "cliente_endereco": "Rua pirajuri",
+      "vendedor_id": "USR-B26D997DAC",
+      "vendedor": "Anna Caroline",
+      "forma_pagamento_id": "PAG-ACEFCC639B",
+      "forma_pagamento_nome": "A vista",
+      "entrada_percentual": 60.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 1809.6,
+          "data_prevista": "2026-10-15"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 1206.4,
+          "data_prevista": "2026-10-21"
+        }
+      ],
+      "material_nome": "Granito Preto São Gabriel",
+      "material_id": "MAT-0003",
+      "itens": [
+        {
+          "descricao": "Bancada Cozinha",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 6.0,
+          "largura": 0.6,
+          "area_m2": 3.5999999999999996,
+          "preco_material_m2": 600.0,
+          "valor_material": 2160.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Frente e Fundo",
+              "quantidade": 12.0,
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "valor_total": 240.0
+            },
+            {
+              "acabamento_id": "MAT-0004",
+              "nome": "Furo Cuba faceado",
+              "descricao": "Furo cuba",
+              "quantidade": 1.0,
+              "unidade": "unidade",
+              "preco_unitario": 280.0,
+              "valor_total": 280.0
+            }
+          ],
+          "valor_total": 2680.0
+        },
+        {
+          "descricao": "Lateral Bancada",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 0.9,
+          "largura": 0.6,
+          "area_m2": 0.54,
+          "preco_material_m2": 600.0,
+          "valor_material": 324.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Frente",
+              "quantidade": 0.6,
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "valor_total": 12.0
+            }
+          ],
+          "valor_total": 336.0
+        }
+      ],
+      "quantidade": 4.14,
+      "unidade": "m²",
+      "largura": 6.0,
+      "altura": 0.6,
+      "observacoes": "",
+      "valor_total": 3016.0,
+      "status": "Cancelado",
+      "data": "2026-10-15",
+      "aprovado": true,
+      "aprovado_por": "Anna Caroline",
+      "aprovado_em": "2026-10-15T13:53:58",
+      "concluido_por": "Administrador",
+      "concluido_em": "2026-10-15T14:14:44",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261015135455",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-B26D997DAC",
+      "vendedor": "Anna Caroline",
+      "forma_pagamento_id": "PAG-ACEFCC639B",
+      "forma_pagamento_nome": "A vista",
+      "entrada_percentual": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-10-15"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 5200.0,
+          "data_prevista": "2026-10-21"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "bancada",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 10.0,
+          "largura": 1.0,
+          "area_m2": 10.0,
+          "preco_material_m2": 520.0,
+          "valor_material": 5200.0,
+          "acabamentos": [],
+          "valor_total": 5200.0
+        }
+      ],
+      "quantidade": 10.0,
+      "unidade": "m²",
+      "largura": 10.0,
+      "altura": 1.0,
+      "observacoes": "",
+      "valor_total": 5200.0,
+      "status": "Cancelado",
+      "data": "2026-10-15",
+      "aprovado": true,
+      "aprovado_por": "Anna Caroline",
+      "aprovado_em": "2026-10-15T13:57:36",
+      "concluido_por": "Anna Caroline",
+      "concluido_em": "2026-10-15T13:58:17",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261016131708",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 645.0,
+      "entrada_percentual": 24.75,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 2632.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 2632.0,
+      "desconto_percentual": 1.0,
+      "desconto_valor": 26.32,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 645.0,
+          "data_prevista": "2026-10-19"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 1960.68,
+          "data_prevista": "2026-10-25"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada Cozinha",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 6.0,
+          "largura": 0.5,
+          "area_m2": 3.0,
+          "preco_material_m2": 520.0,
+          "valor_material": 1560.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-1C8DA3E645",
+              "nome": "Rodopia Verde Ubatuba 10 CM",
+              "descricao": "Rodopia fundo",
+              "unidade": "m² + linear",
+              "preco_unitario": 520.0,
+              "auxiliar": false,
+              "quantidade": 6.0,
+              "quantidade_m2": 0.6000000000000001,
+              "quantidade_linear": 6.0,
+              "altura_m": 0.1,
+              "preco_linear": 120.0,
+              "valor_m2": 312.00000000000006,
+              "valor_linear": 720.0,
+              "valor_total": 1032.0
+            },
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "acabamento reto",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "auxiliar": false,
+              "quantidade": 2.0,
+              "valor_total": 40.0
+            }
+          ],
+          "valor_total": 2632.0,
+          "valor_total_com_gordura": 2632.0
+        }
+      ],
+      "quantidade": 3.0,
+      "unidade": "m²",
+      "largura": 6.0,
+      "altura": 0.5,
+      "observacoes": "",
+      "valor_total": 2605.68,
+      "status": "Cancelado",
+      "data": "2026-10-16",
+      "revisao": 2,
+      "revisado_por": "Administrador",
+      "revisado_em": "2026-10-19T11:08:20",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261016132627",
+      "cliente_nome": "Guilherme Rodrigues Pessoa",
+      "cliente_id": "CLI-DA848D0819",
+      "cliente_telefone": "319999999",
+      "cliente_endereco": "Rua pirajuri",
+      "vendedor_id": "USR-B26D997DAC",
+      "vendedor": "Anna Caroline",
+      "forma_pagamento_id": "PAG-ACEFCC639B",
+      "forma_pagamento_nome": "A vista",
+      "entrada_valor": 808.0,
+      "entrada_percentual": 47.29,
+      "prazo_entrega_dias": 60,
+      "subtotal_itens": 1808.0,
+      "gordura_percentual": 5.0,
+      "subtotal_com_gordura": 1898.4,
+      "desconto_percentual": 10.0,
+      "desconto_valor": 189.84,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 808.0,
+          "data_prevista": "2026-10-16"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 900.56,
+          "data_prevista": "2026-12-15"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 4.0,
+          "largura": 0.5,
+          "area_m2": 2.0,
+          "preco_material_m2": 520.0,
+          "valor_material": 1040.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-1C8DA3E645",
+              "nome": "Rodopia Verde Ubatuba 10 CM",
+              "descricao": "fundo",
+              "unidade": "m² + linear",
+              "preco_unitario": 520.0,
+              "quantidade": 4.0,
+              "quantidade_m2": 0.4,
+              "quantidade_linear": 4.0,
+              "altura_m": 0.1,
+              "preco_linear": 120.0,
+              "valor_m2": 208.0,
+              "valor_linear": 480.0,
+              "valor_total": 688.0
+            },
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "quantidade": 4.0,
+              "valor_total": 80.0
+            }
+          ],
+          "valor_total": 1808.0,
+          "valor_total_com_gordura": 1898.4
+        }
+      ],
+      "quantidade": 2.0,
+      "unidade": "m²",
+      "largura": 4.0,
+      "altura": 0.5,
+      "observacoes": "",
+      "valor_total": 1708.56,
+      "status": "Cancelado",
+      "data": "2026-10-16",
+      "aprovado": true,
+      "aprovado_por": "Administrador",
+      "aprovado_em": "2026-10-19T12:18:07",
+      "concluido_por": "Administrador",
+      "concluido_em": "2026-10-19T13:12:56",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261016133718",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-B26D997DAC",
+      "vendedor": "Anna Caroline",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 369.6,
+      "entrada_percentual": 15.6,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 2369.6,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 2369.6,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 369.6,
+          "data_prevista": "2026-10-16"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 2000.0,
+          "data_prevista": "2026-10-22"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 4.0,
+          "largura": 0.6,
+          "area_m2": 2.4,
+          "preco_material_m2": 520.0,
+          "valor_material": 1248.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-69015EAB18",
+              "nome": "Rodopia Verde Ubatuba 27CM",
+              "descricao": "Rodopia fundo",
+              "unidade": "m² + linear",
+              "preco_unitario": 520.0,
+              "auxiliar": false,
+              "quantidade": 4.0,
+              "quantidade_m2": 1.08,
+              "quantidade_linear": 4.0,
+              "altura_m": 0.27,
+              "preco_linear": 120.0,
+              "valor_m2": 561.6,
+              "valor_linear": 480.0,
+              "valor_total": 1041.6
+            },
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Rodopia fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "auxiliar": true,
+              "quantidade": 4.0,
+              "valor_total": 80.0
+            }
+          ],
+          "valor_total": 2369.6,
+          "valor_total_com_gordura": 2369.6
+        }
+      ],
+      "quantidade": 2.4,
+      "unidade": "m²",
+      "largura": 4.0,
+      "altura": 0.6,
+      "observacoes": "",
+      "valor_total": 2369.6,
+      "status": "Cancelado",
+      "data": "2026-10-16",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261016134803",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 520.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 520.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-10-16"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 520.0,
+          "data_prevista": "2026-10-22"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 1.0,
+          "largura": 1.0,
+          "area_m2": 1.0,
+          "preco_material_m2": 520.0,
+          "valor_material": 520.0,
+          "acabamentos": [],
+          "valor_total": 520.0,
+          "valor_total_com_gordura": 520.0
+        }
+      ],
+      "quantidade": 1.0,
+      "unidade": "m²",
+      "largura": 1.0,
+      "altura": 1.0,
+      "observacoes": "",
+      "valor_total": 520.0,
+      "status": "Cancelado",
+      "data": "2026-10-16",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261016135034",
+      "cliente_nome": "Guilherme Rodrigues Pessoa",
+      "cliente_id": "CLI-DA848D0819",
+      "cliente_telefone": "319999999",
+      "cliente_endereco": "Rua pirajuri",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-ACEFCC639B",
+      "forma_pagamento_nome": "A vista",
+      "entrada_valor": 796.29,
+      "entrada_percentual": 20.98,
+      "prazo_entrega_dias": 30,
+      "subtotal_itens": 3842.4,
+      "gordura_percentual": 4.0,
+      "subtotal_com_gordura": 3996.1,
+      "desconto_percentual": 5.0,
+      "desconto_valor": 199.81,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 796.29,
+          "data_prevista": "2026-10-16"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 3000.0,
+          "data_prevista": "2026-11-15"
+        }
+      ],
+      "material_nome": "Granito Preto São Gabriel",
+      "material_id": "MAT-0003",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 6.0,
+          "largura": 0.6,
+          "area_m2": 3.5999999999999996,
+          "preco_material_m2": 600.0,
+          "valor_material": 2160.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-69015EAB18",
+              "nome": "Rodopia Verde Ubatuba 27CM",
+              "descricao": "Fundo",
+              "unidade": "m² + linear",
+              "preco_unitario": 520.0,
+              "auxiliar": false,
+              "quantidade": 6.0,
+              "quantidade_m2": 1.62,
+              "quantidade_linear": 6.0,
+              "altura_m": 0.27,
+              "preco_linear": 120.0,
+              "valor_m2": 842.4000000000001,
+              "valor_linear": 720.0,
+              "valor_total": 1562.4
+            },
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "auxiliar": true,
+              "quantidade": 6.0,
+              "valor_total": 120.0
+            }
+          ],
+          "valor_total": 3842.4,
+          "valor_total_com_gordura": 3996.1
+        }
+      ],
+      "quantidade": 3.5999999999999996,
+      "unidade": "m²",
+      "largura": 6.0,
+      "altura": 0.6,
+      "observacoes": "",
+      "valor_total": 3796.29,
+      "status": "Cancelado",
+      "data": "2026-10-16",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261019083939",
+      "cliente_nome": "Guilherme Rodrigues Pessoa",
+      "cliente_id": "CLI-DA848D0819",
+      "cliente_telefone": "319999999",
+      "cliente_endereco": "Rua pirajuri",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-ACEFCC639B",
+      "forma_pagamento_nome": "A vista",
+      "entrada_valor": 208.0,
+      "entrada_percentual": 9.72,
+      "prazo_entrega_dias": 30,
+      "subtotal_itens": 2208.0,
+      "gordura_percentual": 2.0,
+      "subtotal_com_gordura": 2252.16,
+      "desconto_percentual": 5.0,
+      "desconto_valor": 112.61,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 208.0,
+          "data_prevista": "2026-10-19"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 1931.55,
+          "data_prevista": "2026-11-18"
+        }
+      ],
+      "material_nome": "Granito Preto São Gabriel",
+      "material_id": "MAT-0003",
+      "itens": [
+        {
+          "descricao": "Bancada Cozinha seca",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 4.0,
+          "largura": 0.6,
+          "area_m2": 2.4,
+          "preco_material_m2": 600.0,
+          "valor_material": 1440.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-1C8DA3E645",
+              "nome": "Rodopia Verde Ubatuba 10 CM",
+              "descricao": "Rodopia Fundo",
+              "unidade": "m² + linear",
+              "preco_unitario": 520.0,
+              "auxiliar": false,
+              "quantidade": 4.0,
+              "quantidade_m2": 0.4,
+              "quantidade_linear": 4.0,
+              "altura_m": 0.1,
+              "preco_linear": 120.0,
+              "valor_m2": 208.0,
+              "valor_linear": 480.0,
+              "valor_total": 688.0
+            },
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Rodopia Fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "auxiliar": true,
+              "quantidade": 4.0,
+              "valor_total": 80.0
+            }
+          ],
+          "valor_total": 2208.0,
+          "valor_total_com_gordura": 2252.16
+        }
+      ],
+      "quantidade": 2.4,
+      "unidade": "m²",
+      "largura": 4.0,
+      "altura": 0.6,
+      "observacoes": "",
+      "valor_total": 2139.55,
+      "status": "Cancelado",
+      "data": "2026-10-19",
+      "aprovado": true,
+      "aprovado_por": "Administrador",
+      "aprovado_em": "2026-10-19T10:48:01",
+      "ativo": false
+    },
+    {
+      "numero": "ORC-20261019131947",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-ACEFCC639B",
+      "forma_pagamento_nome": "A vista",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 45,
+      "subtotal_itens": 4410.0,
+      "gordura_percentual": 1.0,
+      "subtotal_com_gordura": 4454.1,
+      "desconto_percentual": 5.0,
+      "desconto_valor": 222.71,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-10-19"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 4231.39,
+          "data_prevista": "2026-12-03"
+        }
+      ],
+      "material_nome": "Granito Preto Negresco",
+      "material_id": "MAT-AD7CE556AC",
+      "itens": [
+        {
+          "descricao": "Bancada Cozinha",
+          "material_id": "MAT-AD7CE556AC",
+          "material_nome": "Granito Preto Negresco",
+          "comprimento": 6.0,
+          "largura": 0.65,
+          "area_m2": 3.9000000000000004,
+          "preco_material_m2": 420.0,
+          "valor_material": 1638.0000000000002,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-D0A407ECB6",
+              "nome": "Meia Esquadrilha",
+              "descricao": "Meia esquadrilha",
+              "unidade": "metro linear",
+              "preco_unitario": 100.0,
+              "auxiliar": false,
+              "quantidade": 14.6,
+              "valor_total": 1460.0
+            },
+            {
+              "acabamento_id": "MAT-0004",
+              "nome": "Furo Cuba faceado",
+              "descricao": "Furo cuba inox",
+              "unidade": "unidade",
+              "preco_unitario": 280.0,
+              "auxiliar": true,
+              "quantidade": 1.0,
+              "valor_total": 280.0
+            },
+            {
+              "acabamento_id": "MAT-1C8DA3E645",
+              "nome": "Rodopia Verde Ubatuba 10 CM",
+              "descricao": "Rodopia fundo",
+              "unidade": "m² + linear",
+              "preco_unitario": 520.0,
+              "auxiliar": false,
+              "quantidade": 6.0,
+              "quantidade_m2": 0.6000000000000001,
+              "quantidade_linear": 6.0,
+              "altura_m": 0.1,
+              "preco_linear": 120.0,
+              "valor_m2": 312.00000000000006,
+              "valor_linear": 720.0,
+              "valor_total": 1032.0
+            }
+          ],
+          "valor_total": 4410.0,
+          "valor_total_com_gordura": 4454.1
+        }
+      ],
+      "quantidade": 3.9000000000000004,
+      "unidade": "m²",
+      "largura": 6.0,
+      "altura": 0.65,
+      "observacoes": "",
+      "valor_total": 4231.39,
+      "status": "Em análise",
+      "data": "2026-10-19",
+      "revisao": 1,
+      "revisado_por": "Administrador",
+      "revisado_em": "2026-10-19T13:22:18"
+    },
+    {
+      "numero": "ORC-20261105160944",
+      "cliente_nome": "Maria José Rodrigues",
+      "cliente_id": "CLI-7B246E0A76",
+      "cliente_telefone": "31 99202-1334",
+      "cliente_endereco": "Rua Pirajuí, n° 319, apto 14, São Caetano - Betim/MG",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 438.0,
+      "entrada_percentual": 17.96,
+      "prazo_entrega_dias": 45,
+      "subtotal_itens": 2438.4,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 2438.4,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 438.0,
+          "data_prevista": "2026-11-05"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 2000.4,
+          "data_prevista": "2026-12-20"
+        }
+      ],
+      "material_nome": "Granito Preto São Gabriel",
+      "material_id": "MAT-0003",
+      "itens": [
+        {
+          "descricao": "Bancada seca cozinha",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 4.0,
+          "largura": 0.6,
+          "area_m2": 2.4,
+          "preco_material_m2": 600.0,
+          "valor_material": 1440.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-1C8DA3E645",
+              "nome": "Rodopia Verde Ubatuba 10 CM",
+              "descricao": "Frente e laterais",
+              "unidade": "m² + linear",
+              "preco_unitario": 520.0,
+              "auxiliar": false,
+              "quantidade": 5.2,
+              "quantidade_m2": 0.52,
+              "quantidade_linear": 5.2,
+              "altura_m": 0.1,
+              "preco_linear": 120.0,
+              "valor_m2": 270.40000000000003,
+              "valor_linear": 624.0,
+              "valor_total": 894.4000000000001
+            },
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Frente e laterais",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "auxiliar": true,
+              "quantidade": 5.2,
+              "valor_total": 104.0
+            }
+          ],
+          "valor_total": 2438.4,
+          "valor_total_com_gordura": 2438.4
+        }
+      ],
+      "quantidade": 2.4,
+      "unidade": "m²",
+      "largura": 4.0,
+      "altura": 0.6,
+      "observacoes": "",
+      "valor_total": 2438.4,
+      "status": "Em análise",
+      "data": "2026-11-05"
+    },
+    {
+      "numero": "ORC-20261111112444",
+      "cliente_nome": "Guilherme Rodrigues Pessoa",
+      "cliente_id": "CLI-DA848D0819",
+      "cliente_telefone": "319999999",
+      "cliente_endereco": "Rua pirajuri",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 4512.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 4512.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 4512.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Preto São Gabriel, Granito Verde Ubatuba",
+      "material_id": "MAT-0003",
+      "itens": [
+        {
+          "descricao": "Bancada Cozinha",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 6.0,
+          "largura": 0.6,
+          "area_m2": 3.5999999999999996,
+          "preco_material_m2": 600.0,
+          "valor_material": 2160.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Frente e fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "auxiliar": false,
+              "quantidade": 12.0,
+              "valor_total": 240.0
+            },
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Frente e fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "auxiliar": false,
+              "quantidade": 12.0,
+              "valor_total": 240.0
+            }
+          ],
+          "valor_total": 2640.0,
+          "valor_total_com_gordura": 2640.0
+        },
+        {
+          "descricao": "Bancada Cozinha",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 6.0,
+          "largura": 0.6,
+          "area_m2": 3.5999999999999996,
+          "preco_material_m2": 520.0,
+          "valor_material": 1871.9999999999998,
+          "acabamentos": [],
+          "valor_total": 1871.9999999999998,
+          "valor_total_com_gordura": 1872.0
+        }
+      ],
+      "quantidade": 7.199999999999999,
+      "unidade": "m²",
+      "largura": 6.0,
+      "altura": 0.6,
+      "observacoes": "",
+      "valor_total": 4512.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "ORC-20261111112545",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 520.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 520.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 520.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada Cozinha",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 1.0,
+          "largura": 1.0,
+          "area_m2": 1.0,
+          "preco_material_m2": 520.0,
+          "valor_material": 520.0,
+          "acabamentos": [],
+          "valor_total": 520.0,
+          "valor_total_com_gordura": 520.0
+        }
+      ],
+      "quantidade": 1.0,
+      "unidade": "m²",
+      "largura": 1.0,
+      "altura": 1.0,
+      "observacoes": "",
+      "valor_total": 520.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "ORC-20261111115729",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 7440.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 7440.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 7440.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Preto São Gabriel",
+      "material_id": "MAT-0003",
+      "itens": [
+        {
+          "descricao": "Bancada Cozinha",
+          "observacao_item": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaafffffffffffffffffffff",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 6.0,
+          "largura": 1.0,
+          "area_m2": 6.0,
+          "preco_material_m2": 600.0,
+          "valor_material": 7200.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "medida": 6.0,
+              "largura_m": 1.0,
+              "auxiliar": false,
+              "quantidade_pecas": 2,
+              "quantidade": 6.0,
+              "valor_total": 240.0
+            }
+          ],
+          "quantidade_pecas": 2,
+          "valor_total": 7440.0,
+          "valor_total_com_gordura": 7440.0
+        }
+      ],
+      "quantidade": 12.0,
+      "unidade": "m²",
+      "largura": 6.0,
+      "altura": 1.0,
+      "observacoes": "Entrega a ser combinada com cliente ",
+      "valor_total": 7440.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "ORC-20261111115830",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 600.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 600.0,
+      "desconto_percentual": 7.0,
+      "desconto_valor": 42.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 558.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Preto São Gabriel",
+      "material_id": "MAT-0003",
+      "itens": [
+        {
+          "descricao": "Bancada Cozinha",
+          "observacao_item": "",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 1.0,
+          "largura": 1.0,
+          "area_m2": 1.0,
+          "preco_material_m2": 600.0,
+          "valor_material": 600.0,
+          "acabamentos": [],
+          "quantidade_pecas": 1,
+          "valor_total": 600.0,
+          "valor_total_com_gordura": 600.0
+        }
+      ],
+      "quantidade": 1.0,
+      "unidade": "m²",
+      "largura": 1.0,
+      "altura": 1.0,
+      "observacoes": "",
+      "valor_total": 558.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "ORC-20261111120238",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 1320.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 1320.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 1320.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Preto São Gabriel",
+      "material_id": "MAT-0003",
+      "itens": [
+        {
+          "descricao": "soleira",
+          "observacao_item": "Cada peça devera ter exato a medida",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 0.6,
+          "largura": 0.3,
+          "area_m2": 0.18,
+          "preco_material_m2": 600.0,
+          "valor_material": 1080.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "frente e fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "medida": 1.2,
+              "largura_m": 1.0,
+              "auxiliar": false,
+              "quantidade_pecas": 10,
+              "quantidade": 1.2,
+              "valor_total": 240.0
+            }
+          ],
+          "quantidade_pecas": 10,
+          "valor_total": 1320.0,
+          "valor_total_com_gordura": 1320.0
+        }
+      ],
+      "quantidade": 1.7999999999999998,
+      "unidade": "m²",
+      "largura": 0.6,
+      "altura": 0.3,
+      "observacoes": "",
+      "valor_total": 1320.0,
+      "status": "Em análise",
+      "data": "2026-11-11",
+      "revisao": 1,
+      "revisado_por": "Administrador",
+      "revisado_em": "2026-11-11T12:07:42"
+    },
+    {
+      "numero": "0001.11.11.26",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 4200.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 4200.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 4200.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Preto São Gabriel",
+      "material_id": "MAT-0003",
+      "itens": [
+        {
+          "descricao": "soleira",
+          "observacao_item": "",
+          "material_id": "MAT-0003",
+          "material_nome": "Granito Preto São Gabriel",
+          "comprimento": 10.0,
+          "largura": 0.2,
+          "area_m2": 2.0,
+          "preco_material_m2": 600.0,
+          "valor_material": 3600.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "medida": 10.0,
+              "largura_m": 1.0,
+              "auxiliar": false,
+              "quantidade_pecas": 3,
+              "quantidade": 10.0,
+              "valor_total": 600.0
+            }
+          ],
+          "quantidade_pecas": 3,
+          "valor_total": 4200.0,
+          "valor_total_com_gordura": 4200.0
+        }
+      ],
+      "quantidade": 6.0,
+      "unidade": "m²",
+      "largura": 10.0,
+      "altura": 0.2,
+      "observacoes": "",
+      "valor_total": 4200.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "0002.11.11.26",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 1120.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 1120.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 1120.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada Cozinha",
+          "observacao_item": "",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 1.0,
+          "largura": 1.0,
+          "area_m2": 1.0,
+          "preco_material_m2": 520.0,
+          "valor_material": 1040.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Rodopia fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "medida": 2.0,
+              "largura_m": 1.0,
+              "auxiliar": false,
+              "quantidade_pecas": 2,
+              "quantidade": 2.0,
+              "valor_total": 80.0
+            }
+          ],
+          "quantidade_pecas": 2,
+          "valor_total": 1120.0,
+          "valor_total_com_gordura": 1120.0
+        }
+      ],
+      "quantidade": 2.0,
+      "unidade": "m²",
+      "largura": 1.0,
+      "altura": 1.0,
+      "observacoes": "",
+      "valor_total": 1120.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "0003.11.11.26",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 11200.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 11200.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 11200.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "bancada",
+          "observacao_item": "",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 10.0,
+          "largura": 1.0,
+          "area_m2": 10.0,
+          "preco_material_m2": 520.0,
+          "valor_material": 10400.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Rodopia fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "medida": 20.0,
+              "largura_m": 1.0,
+              "auxiliar": false,
+              "quantidade_pecas": 2,
+              "quantidade": 20.0,
+              "valor_total": 800.0
+            }
+          ],
+          "quantidade_pecas": 2,
+          "valor_total": 11200.0,
+          "valor_total_com_gordura": 11200.0
+        }
+      ],
+      "quantidade": 20.0,
+      "unidade": "m²",
+      "largura": 10.0,
+      "altura": 1.0,
+      "observacoes": "",
+      "valor_total": 11200.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "0004.11.11.26",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 11200.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 11200.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 11200.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "observacao_item": "",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 5.0,
+          "largura": 2.0,
+          "area_m2": 10.0,
+          "preco_material_m2": 520.0,
+          "valor_material": 10400.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Frente e Fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "medida": 20.0,
+              "largura_m": 1.0,
+              "auxiliar": false,
+              "quantidade_pecas": 2,
+              "quantidade": 20.0,
+              "valor_total": 800.0
+            }
+          ],
+          "quantidade_pecas": 2,
+          "valor_total": 11200.0,
+          "valor_total_com_gordura": 11200.0
+        }
+      ],
+      "quantidade": 20.0,
+      "unidade": "m²",
+      "largura": 5.0,
+      "altura": 2.0,
+      "observacoes": "",
+      "valor_total": 11200.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "0005.11.11.26",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 7968.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 7968.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 7968.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "observacao_item": "",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 6.0,
+          "largura": 0.6,
+          "area_m2": 3.5999999999999996,
+          "preco_material_m2": 520.0,
+          "valor_material": 7487.999999999999,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Fundo",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "medida": 6.0,
+              "largura_m": 1.0,
+              "auxiliar": false,
+              "quantidade_pecas": 4,
+              "quantidade": 6.0,
+              "valor_total": 480.0
+            }
+          ],
+          "quantidade_pecas": 4,
+          "valor_total": 7967.999999999999,
+          "valor_total_com_gordura": 7968.0
+        }
+      ],
+      "quantidade": 14.399999999999999,
+      "unidade": "m²",
+      "largura": 6.0,
+      "altura": 0.6,
+      "observacoes": "",
+      "valor_total": 7968.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "0006.11.11.26",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 324.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 324.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 324.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Rodapé 10 CM Verde ubatúba",
+      "material_id": "MAT-BAA8B23744",
+      "itens": [
+        {
+          "descricao": "Rodapé",
+          "observacao_item": "",
+          "material_id": "MAT-BAA8B23744",
+          "material_nome": "Rodapé 10 CM Verde ubatúba",
+          "comprimento": 2.0,
+          "largura": 0.1,
+          "area_m2": 0.2,
+          "preco_material_m2": 520.0,
+          "valor_material": 104.0,
+          "unidade_principal": "m² + linear",
+          "material_base_nome": "Granito Verde Ubatuba",
+          "preco_linear_principal": 90.0,
+          "valor_linear_principal": 180.0,
+          "acabamentos": [
+            {
+              "acabamento_id": "MAT-0002",
+              "nome": "Acabamento Reto",
+              "descricao": "Acabamento sup.",
+              "unidade": "metro linear",
+              "preco_unitario": 20.0,
+              "medida": 2.0,
+              "largura_m": 1.0,
+              "auxiliar": false,
+              "quantidade_pecas": 1,
+              "quantidade": 2.0,
+              "valor_total": 40.0
+            }
+          ],
+          "quantidade_pecas": 1,
+          "valor_total": 324.0,
+          "valor_total_com_gordura": 324.0
+        }
+      ],
+      "quantidade": 0.2,
+      "unidade": "m²",
+      "largura": 2.0,
+      "altura": 0.1,
+      "observacoes": "",
+      "valor_total": 324.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "0007.11.11.26",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 29120.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 29120.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 29120.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "observacao_item": "",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 56.0,
+          "largura": 1.0,
+          "area_m2": 56.0,
+          "preco_material_m2": 520.0,
+          "valor_material": 29120.0,
+          "unidade_principal": "m²",
+          "material_base_nome": "",
+          "preco_linear_principal": 0,
+          "valor_linear_principal": 0.0,
+          "acabamentos": [],
+          "quantidade_pecas": 1,
+          "valor_total": 29120.0,
+          "valor_total_com_gordura": 29120.0
+        }
+      ],
+      "quantidade": 56.0,
+      "unidade": "m²",
+      "largura": 56.0,
+      "altura": 1.0,
+      "observacoes": "",
+      "valor_total": 29120.0,
+      "status": "Em análise",
+      "data": "2026-11-11"
+    },
+    {
+      "numero": "0008.11.11.26",
+      "cliente_nome": "João Aguilar",
+      "cliente_id": "CLI-0001",
+      "cliente_telefone": "31996573382",
+      "cliente_endereco": "Rua perdizes, n° 26, Jardim Teresopolis, Betim,",
+      "vendedor_id": "USR-57BCDFC94A",
+      "vendedor": "Administrador",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "entrada_valor": 0.0,
+      "entrada_percentual": 0.0,
+      "prazo_entrega_dias": 6,
+      "subtotal_itens": 520.0,
+      "gordura_percentual": 0.0,
+      "subtotal_com_gordura": 520.0,
+      "desconto_percentual": 0.0,
+      "desconto_valor": 0.0,
+      "parcelas_previstas": [
+        {
+          "etapa": "Entrada",
+          "valor": 0.0,
+          "data_prevista": "2026-11-11"
+        },
+        {
+          "etapa": "Entrega do material",
+          "valor": 520.0,
+          "data_prevista": "2026-11-17"
+        }
+      ],
+      "material_nome": "Granito Verde Ubatuba",
+      "material_id": "MAT-0001",
+      "itens": [
+        {
+          "descricao": "Bancada",
+          "observacao_item": "",
+          "material_id": "MAT-0001",
+          "material_nome": "Granito Verde Ubatuba",
+          "comprimento": 1.0,
+          "largura": 1.0,
+          "area_m2": 1.0,
+          "preco_material_m2": 520.0,
+          "valor_material": 520.0,
+          "unidade_principal": "m²",
+          "material_base_nome": "",
+          "preco_linear_principal": 0,
+          "valor_linear_principal": 0.0,
+          "acabamentos": [],
+          "quantidade_pecas": 1,
+          "valor_total": 520.0,
+          "valor_total_com_gordura": 520.0
+        }
+      ],
+      "quantidade": 1.0,
+      "unidade": "m²",
+      "largura": 1.0,
+      "altura": 1.0,
+      "observacoes": "",
+      "valor_total": 520.0,
+      "status": "Cancelado",
+      "data": "2026-11-11",
+      "ativo": false
+    }
+  ],
+  "formas_pagamento": [
+    {
+      "id": "PAG-FA1A35E46F",
+      "nome": "Pix",
+      "descricao": "Pagamentos via Pix",
+      "ativo": true
+    },
+    {
+      "id": "PAG-ACEFCC639B",
+      "nome": "A vista",
+      "descricao": "",
+      "ativo": true
+    }
+  ],
+  "recebimentos": [
+    {
+      "id": "REC-2FE80A4A15",
+      "orcamento_numero": "ORC-20261015135455",
+      "cliente_nome": "João Aguilar",
+      "descricao": "Entrega do material",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "valor": 5200.0,
+      "data": "2026-10-22",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline"
+    },
+    {
+      "id": "REC-1043281F5C",
+      "orcamento_numero": "ORC-20261015135317",
+      "cliente_nome": "Guilherme Rodrigues Pessoa",
+      "descricao": "Entrada",
+      "forma_pagamento_id": "PAG-FA1A35E46F",
+      "forma_pagamento_nome": "Pix",
+      "valor": 1809.6,
+      "data": "2026-10-15",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline"
+    },
+    {
+      "id": "REC-3A172CBD76",
+      "orcamento_numero": "ORC-20261015135317",
+      "cliente_nome": "Guilherme Rodrigues Pessoa",
+      "descricao": "Entrega do material",
+      "forma_pagamento_id": "PAG-ACEFCC639B",
+      "forma_pagamento_nome": "A vista",
+      "valor": 1206.4,
+      "data": "2026-10-16",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "USR-57BCDFC94A",
+      "nome": "Administrador",
+      "login": "administrador.catalao",
+      "senha_hash": "55346a6320d96e7790467b0012631b53$67989f5fa4f02c8fae56defb91e8efdd5d98786a436b6a88bf9e9ba7546fe546",
+      "administrador": true,
+      "permissoes": {
+        "/orcamentos": "editar",
+        "/clientes": "editar",
+        "/historico": "editar",
+        "/materiais": "editar",
+        "/financeiro": "editar",
+        "/funcionarios": "editar",
+        "/gerencial": "editar"
+      },
+      "ativo": true
+    },
+    {
+      "id": "USR-B26D997DAC",
+      "nome": "Anna Caroline",
+      "login": "anna.caroline",
+      "senha_hash": "c3279748d26fe30d4ba948b431b28b59$600a6c1c088d4b8903c4c964ff6df0932cdf27dbcc8bbae8e42f9cec32ab5245",
+      "administrador": false,
+      "permissoes": {
+        "/orcamentos": "editar",
+        "/clientes": "editar",
+        "/historico": "editar",
+        "/materiais": "editar",
+        "/financeiro": "editar",
+        "/funcionarios": "editar",
+        "/gerencial": "visualizar"
+      },
+      "ativo": true
+    },
+    {
+      "id": "USR-F1276710AD",
+      "nome": "Fabricio Loscha",
+      "login": "fabricio.loscha",
+      "senha_hash": "686b9eeb333f2f09288dbc3ade752d7f$ac65568666eef54252512798b419fff7494aa649ab0157e51f0905db4ddf4992",
+      "administrador": false,
+      "permissoes": {
+        "/orcamentos": "editar",
+        "/clientes": "editar",
+        "/historico": "editar",
+        "/materiais": "editar",
+        "/financeiro": "visualizar",
+        "/funcionarios": "nenhum",
+        "/gerencial": "nenhum"
+      },
+      "ativo": true
+    }
+  ],
+  "auditoria": [
+    {
+      "id": "AUD-BC463BF3D9",
+      "data_hora": "2026-10-15T13:36:30",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "administrador",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": "Configuração inicial"
+    },
+    {
+      "id": "AUD-13524B7A98",
+      "data_hora": "2026-10-15T13:37:30",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou funcionário",
+      "entidade": "funcionário",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": "Administrador (administrador.catalao)"
+    },
+    {
+      "id": "AUD-CC16C738D1",
+      "data_hora": "2026-10-15T13:37:46",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "cliente",
+      "entidade_id": "CLI-0001",
+      "detalhes": "João Aguilar"
+    },
+    {
+      "id": "AUD-1F4A3FB0F4",
+      "data_hora": "2026-10-15T13:39:38",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "cliente",
+      "entidade_id": "CLI-0001",
+      "detalhes": "João Aguilar"
+    },
+    {
+      "id": "AUD-336358693C",
+      "data_hora": "2026-10-15T13:39:47",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "material",
+      "entidade_id": "MAT-0001",
+      "detalhes": "Granito Vede Ubatuba"
+    },
+    {
+      "id": "AUD-5ED1D506D7",
+      "data_hora": "2026-10-15T13:40:26",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "material",
+      "entidade_id": "MAT-0001",
+      "detalhes": "Granito Verde Ubatuba"
+    },
+    {
+      "id": "AUD-2BEBE0AD84",
+      "data_hora": "2026-10-15T13:42:36",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "forma de pagamento",
+      "entidade_id": "PAG-FA1A35E46F",
+      "detalhes": "Pix"
+    },
+    {
+      "id": "AUD-C473A29BB1",
+      "data_hora": "2026-10-15T13:42:52",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "forma de pagamento",
+      "entidade_id": "PAG-ACEFCC639B",
+      "detalhes": "A vista"
+    },
+    {
+      "id": "AUD-BD6523C882",
+      "data_hora": "2026-10-15T13:43:38",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "cliente",
+      "entidade_id": "CLI-DA848D0819",
+      "detalhes": "Guilherme Rodrigues Pessoa"
+    },
+    {
+      "id": "AUD-3B1379E2AE",
+      "data_hora": "2026-10-15T13:43:44",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "cliente",
+      "entidade_id": "CLI-DA848D0819",
+      "detalhes": "Guilherme Rodrigues Pessoa"
+    },
+    {
+      "id": "AUD-9271B27C62",
+      "data_hora": "2026-10-15T13:46:58",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015093627",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-99F21CFBA3",
+      "data_hora": "2026-10-15T13:47:04",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015101018",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-2029250036",
+      "data_hora": "2026-10-15T13:47:09",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015101939",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-BE76858D8E",
+      "data_hora": "2026-10-15T13:47:13",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015105154",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-083D840748",
+      "data_hora": "2026-10-15T13:48:53",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "cadastrou funcionário",
+      "entidade": "funcionário",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": "Anna Caroline (anna.caroline)"
+    },
+    {
+      "id": "AUD-29F4A634C8",
+      "data_hora": "2026-10-15T13:48:56",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-FF956E311F",
+      "data_hora": "2026-10-15T13:49:29",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-F14140DA3B",
+      "data_hora": "2026-10-15T13:53:17",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135317",
+      "detalhes": "Guilherme Rodrigues Pessoa - R$ 3,016.00"
+    },
+    {
+      "id": "AUD-1A40107779",
+      "data_hora": "2026-10-15T13:53:58",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "aprovou e iniciou produção",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135317",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-1DF6253978",
+      "data_hora": "2026-10-15T13:54:55",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135455",
+      "detalhes": "João Aguilar - R$ 5,200.00"
+    },
+    {
+      "id": "AUD-0E11010A9F",
+      "data_hora": "2026-10-15T13:57:36",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "aprovou e iniciou produção",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135455",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-EAFCFAF46E",
+      "data_hora": "2026-10-15T13:58:17",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "concluiu orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135455",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-ACFE5EF48A",
+      "data_hora": "2026-10-15T13:59:12",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "registrou recebimento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135455",
+      "detalhes": "R$ 5,200.00 - Entrega do material"
+    },
+    {
+      "id": "AUD-592B0FB7FE",
+      "data_hora": "2026-10-15T14:00:30",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "registrou recebimento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135317",
+      "detalhes": "R$ 1,809.60 - Entrada"
+    },
+    {
+      "id": "AUD-8EE3FBCC3D",
+      "data_hora": "2026-10-15T14:02:48",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-982BB1070D",
+      "data_hora": "2026-10-15T14:02:52",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-B97426F4D9",
+      "data_hora": "2026-10-15T14:12:54",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-56F155054D",
+      "data_hora": "2026-10-15T14:14:21",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-81DB28AAA5",
+      "data_hora": "2026-10-15T14:14:44",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "concluiu orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135317",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-427A06DCE8",
+      "data_hora": "2026-10-15T14:20:54",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-54F1A120B4",
+      "data_hora": "2026-10-15T14:21:08",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-0551D93687",
+      "data_hora": "2026-10-15T15:20:13",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-290F1FF8D4",
+      "data_hora": "2026-10-15T17:00:05",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-4C036AB835",
+      "data_hora": "2026-10-16T08:08:31",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-8386DF4C21",
+      "data_hora": "2026-10-16T09:18:00",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-5F81347B7E",
+      "data_hora": "2026-10-16T09:23:03",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-5339A0E912",
+      "data_hora": "2026-10-16T09:53:51",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "material",
+      "entidade_id": "MAT-5BBD0505F4",
+      "detalhes": "Rebaixo Italiano"
+    },
+    {
+      "id": "AUD-9BA1C2227C",
+      "data_hora": "2026-10-16T09:56:03",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "registrou recebimento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135317",
+      "detalhes": "R$ 1,206.40 - Entrega do material"
+    },
+    {
+      "id": "AUD-515186CAEF",
+      "data_hora": "2026-10-16T09:57:34",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-E27A32DF8A",
+      "data_hora": "2026-10-16T09:57:41",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-D328952375",
+      "data_hora": "2026-10-16T10:14:00",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou funcionário",
+      "entidade": "funcionário",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": "Administrador (administrador.catalao)"
+    },
+    {
+      "id": "AUD-02967E9963",
+      "data_hora": "2026-10-16T12:00:55",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-23AD1649E4",
+      "data_hora": "2026-10-16T12:00:56",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-4E8FB9C7C6",
+      "data_hora": "2026-10-16T12:16:16",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-34A7FF8286",
+      "data_hora": "2026-10-16T12:17:43",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-DDB59F86EC",
+      "data_hora": "2026-10-16T12:20:11",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-759AD9FB7E",
+      "data_hora": "2026-10-16T12:21:47",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-C43E6713EC",
+      "data_hora": "2026-10-16T12:22:23",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-EE0FEAEDE4",
+      "data_hora": "2026-10-16T12:24:57",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-027A448BF1",
+      "data_hora": "2026-10-16T12:33:02",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-DAD4840C4B",
+      "data_hora": "2026-10-16T12:43:29",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "criou",
+      "entidade": "material",
+      "entidade_id": "MAT-0D7B662D59",
+      "detalhes": "Rodopia 10 cm"
+    },
+    {
+      "id": "AUD-9FEA9FAC62",
+      "data_hora": "2026-10-16T12:43:48",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "alterou",
+      "entidade": "material",
+      "entidade_id": "MAT-0D7B662D59",
+      "detalhes": "Rodopia 10 cm"
+    },
+    {
+      "id": "AUD-FAFA6BB366",
+      "data_hora": "2026-10-16T12:47:32",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "alterou",
+      "entidade": "material",
+      "entidade_id": "MAT-0D7B662D59",
+      "detalhes": "Rodopia Verde Ubatuba 10 CM"
+    },
+    {
+      "id": "AUD-FDF91191EE",
+      "data_hora": "2026-10-16T12:58:50",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-2664EAF118",
+      "data_hora": "2026-10-16T12:58:55",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-22885B0B43",
+      "data_hora": "2026-10-16T12:59:11",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-50D2A8BC25",
+      "data_hora": "2026-10-16T13:00:42",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "excluiu",
+      "entidade": "material",
+      "entidade_id": "MAT-0D7B662D59",
+      "detalhes": "Rodopia Verde Ubatuba 10 CM"
+    },
+    {
+      "id": "AUD-FE927C4D31",
+      "data_hora": "2026-10-16T13:01:26",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "criou",
+      "entidade": "material",
+      "entidade_id": "MAT-1C8DA3E645",
+      "detalhes": "Rodopia Verde Ubatuba 10 CM"
+    },
+    {
+      "id": "AUD-A3DD1F4B85",
+      "data_hora": "2026-10-16T13:09:00",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-8B56B9BB5D",
+      "data_hora": "2026-10-16T13:15:16",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-1219050CD5",
+      "data_hora": "2026-10-16T13:15:32",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "alterou",
+      "entidade": "material",
+      "entidade_id": "MAT-1C8DA3E645",
+      "detalhes": "Rodopia Verde Ubatuba 10 CM"
+    },
+    {
+      "id": "AUD-8EB61BD216",
+      "data_hora": "2026-10-16T13:17:08",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016131708",
+      "detalhes": "João Aguilar - R$ 2,625.48"
+    },
+    {
+      "id": "AUD-366D9FB66D",
+      "data_hora": "2026-10-16T13:25:31",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-13828C74BB",
+      "data_hora": "2026-10-16T13:26:27",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016132627",
+      "detalhes": "Guilherme Rodrigues Pessoa - R$ 1,708.56"
+    },
+    {
+      "id": "AUD-6E45BAE8DE",
+      "data_hora": "2026-10-16T13:34:39",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "criou",
+      "entidade": "material",
+      "entidade_id": "MAT-A0BD73F260",
+      "detalhes": "Rodopia Verde Ubatuba 27CM"
+    },
+    {
+      "id": "AUD-EC7E3DE5C0",
+      "data_hora": "2026-10-16T13:34:54",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-F0CA05640A",
+      "data_hora": "2026-10-16T13:35:44",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "alterou",
+      "entidade": "material",
+      "entidade_id": "MAT-A0BD73F260",
+      "detalhes": "Rodopia Verde Ubatuba 27CM"
+    },
+    {
+      "id": "AUD-C8AB1390F3",
+      "data_hora": "2026-10-16T13:36:12",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "excluiu",
+      "entidade": "material",
+      "entidade_id": "MAT-A0BD73F260",
+      "detalhes": "Rodopia Verde Ubatuba 27CM"
+    },
+    {
+      "id": "AUD-119E17E1D2",
+      "data_hora": "2026-10-16T13:36:37",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "criou",
+      "entidade": "material",
+      "entidade_id": "MAT-69015EAB18",
+      "detalhes": "Rodopia Verde Ubatuba 27CM"
+    },
+    {
+      "id": "AUD-DDF41BF69C",
+      "data_hora": "2026-10-16T13:37:18",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016133718",
+      "detalhes": "João Aguilar - R$ 2,369.60"
+    },
+    {
+      "id": "AUD-6D08BB61D4",
+      "data_hora": "2026-10-16T13:43:17",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-996EAFF226",
+      "data_hora": "2026-10-16T13:43:33",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-51C25B8C2A",
+      "data_hora": "2026-10-16T13:44:56",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-0B469E8A02",
+      "data_hora": "2026-10-16T13:46:21",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-CBA2449F12",
+      "data_hora": "2026-10-16T13:46:37",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-B549BD9F85",
+      "data_hora": "2026-10-16T13:48:03",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016134803",
+      "detalhes": "João Aguilar - R$ 520.00"
+    },
+    {
+      "id": "AUD-59170F7B54",
+      "data_hora": "2026-10-16T13:48:58",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "modelo_pdf",
+      "entidade_id": "modelo",
+      "detalhes": "Modelo do PDF do orçamento"
+    },
+    {
+      "id": "AUD-BFBB11026F",
+      "data_hora": "2026-10-16T13:50:34",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016135034",
+      "detalhes": "Guilherme Rodrigues Pessoa - R$ 3,796.29"
+    },
+    {
+      "id": "AUD-685C1F1FAB",
+      "data_hora": "2026-10-16T13:51:50",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "cadastrou funcionário",
+      "entidade": "funcionário",
+      "entidade_id": "USR-F1276710AD",
+      "detalhes": "Fabricio Loscha (fabricio.loscha)"
+    },
+    {
+      "id": "AUD-91129018D1",
+      "data_hora": "2026-10-16T13:51:53",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-E22B64BDA1",
+      "data_hora": "2026-10-16T13:52:04",
+      "usuario_id": "USR-F1276710AD",
+      "usuario_nome": "Fabricio Loscha",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-F1276710AD",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-508311DB77",
+      "data_hora": "2026-10-16T14:02:47",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-1A5555FEAC",
+      "data_hora": "2026-10-16T14:05:10",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "modelo_pdf",
+      "entidade_id": "modelo",
+      "detalhes": "Modelo do PDF do orçamento"
+    },
+    {
+      "id": "AUD-3F16921069",
+      "data_hora": "2026-10-16T14:14:28",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "material",
+      "entidade_id": "MAT-1BBCF40A58",
+      "detalhes": "Rodopia Verde Ubatuba 5 CM"
+    },
+    {
+      "id": "AUD-8DD67A0D36",
+      "data_hora": "2026-10-16T14:15:19",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "material",
+      "entidade_id": "MAT-1BBCF40A58",
+      "detalhes": "Rodopia Verde Ubatuba 5 CM"
+    },
+    {
+      "id": "AUD-A60BB553F5",
+      "data_hora": "2026-10-16T14:21:11",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-55A727BA3E",
+      "data_hora": "2026-10-16T14:21:40",
+      "usuario_id": "USR-B26D997DAC",
+      "usuario_nome": "Anna Caroline",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-B26D997DAC",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-A61853DD33",
+      "data_hora": "2026-10-19T08:35:05",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-A088C19029",
+      "data_hora": "2026-10-19T08:36:42",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-0EB20797C3",
+      "data_hora": "2026-10-19T08:38:29",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-A4F5F7E616",
+      "data_hora": "2026-10-19T08:39:39",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261019083939",
+      "detalhes": "Guilherme Rodrigues Pessoa - R$ 2,139.55"
+    },
+    {
+      "id": "AUD-4AB5F6FD4F",
+      "data_hora": "2026-10-19T08:40:50",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-668123022C",
+      "data_hora": "2026-10-19T10:47:32",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-2BC6F5B8BF",
+      "data_hora": "2026-10-19T10:48:01",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "aprovou e iniciou produção",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261019083939",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-23C7680DE9",
+      "data_hora": "2026-10-19T10:48:23",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261019083939",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-EFB25D8884",
+      "data_hora": "2026-10-19T10:50:35",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "modelo_pdf",
+      "entidade_id": "modelo",
+      "detalhes": "Modelo do PDF do orçamento"
+    },
+    {
+      "id": "AUD-5988E49DAC",
+      "data_hora": "2026-10-19T10:51:23",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "revisou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016131708",
+      "detalhes": "Revisão 1"
+    },
+    {
+      "id": "AUD-433F0CAFCD",
+      "data_hora": "2026-10-19T11:07:44",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-29D60035EC",
+      "data_hora": "2026-10-19T11:08:20",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "revisou orçamento e itens",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016131708",
+      "detalhes": "Revisão 2 - João Aguilar - R$ 2,605.68"
+    },
+    {
+      "id": "AUD-7B7A37D7A5",
+      "data_hora": "2026-10-19T11:16:14",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-02ABED9468",
+      "data_hora": "2026-10-19T12:01:42",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-1D842292DC",
+      "data_hora": "2026-10-19T12:16:52",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-B673A4F69B",
+      "data_hora": "2026-10-19T12:18:07",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "aprovou e iniciou produção",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016132627",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-DB632A3C6F",
+      "data_hora": "2026-10-19T12:24:04",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-36CAE57F89",
+      "data_hora": "2026-10-19T12:50:44",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-BEA7D25438",
+      "data_hora": "2026-10-19T12:51:00",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-43036FC60D",
+      "data_hora": "2026-10-19T13:10:46",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-1B679BCB14",
+      "data_hora": "2026-10-19T13:11:14",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-DB68DBCCCD",
+      "data_hora": "2026-10-19T13:12:56",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "concluiu orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016132627",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-CE96A1E919",
+      "data_hora": "2026-10-19T13:13:08",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016131708",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-F36C0D7C5F",
+      "data_hora": "2026-10-19T13:13:11",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016132627",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-9876E1D8F8",
+      "data_hora": "2026-10-19T13:13:13",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016133718",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-D1B45C4D04",
+      "data_hora": "2026-10-19T13:13:16",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016134803",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-6E8092165F",
+      "data_hora": "2026-10-19T13:13:18",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261016135034",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-31017675EB",
+      "data_hora": "2026-10-19T13:13:20",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135317",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-442C304D28",
+      "data_hora": "2026-10-19T13:13:22",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261015135455",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-5712570BF6",
+      "data_hora": "2026-10-19T13:14:41",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "material",
+      "entidade_id": "MAT-AD7CE556AC",
+      "detalhes": "Granito Preto Negresco"
+    },
+    {
+      "id": "AUD-61E7008BA0",
+      "data_hora": "2026-10-19T13:15:45",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "material",
+      "entidade_id": "MAT-D0A407ECB6",
+      "detalhes": "Meia Esquadrilha"
+    },
+    {
+      "id": "AUD-70DE459353",
+      "data_hora": "2026-10-19T13:19:47",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261019131947",
+      "detalhes": "João Aguilar - R$ 5,749.32"
+    },
+    {
+      "id": "AUD-4835131440",
+      "data_hora": "2026-10-19T13:20:13",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-7240871AFC",
+      "data_hora": "2026-10-19T13:22:02",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-FC50E9A498",
+      "data_hora": "2026-10-19T13:22:18",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "revisou orçamento e itens",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261019131947",
+      "detalhes": "Revisão 1 - João Aguilar - R$ 4,231.39"
+    },
+    {
+      "id": "AUD-249D48B2B8",
+      "data_hora": "2026-10-19T13:28:00",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "cliente",
+      "entidade_id": "CLI-7B246E0A76",
+      "detalhes": "Maria José Rodrigues"
+    },
+    {
+      "id": "AUD-B7B4C15CA3",
+      "data_hora": "2026-10-19T13:32:56",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-455499A9D0",
+      "data_hora": "2026-10-19T16:40:48",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-CDD4BBEDFC",
+      "data_hora": "2026-10-21T13:37:26",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-9F156CF965",
+      "data_hora": "2026-10-21T13:55:46",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-D9BD00DF20",
+      "data_hora": "2026-10-21T14:15:24",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-E0A650A5BF",
+      "data_hora": "2026-10-21T14:35:47",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-282576B493",
+      "data_hora": "2026-10-21T14:55:37",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-778FF8494F",
+      "data_hora": "2026-10-21T15:02:58",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-D230E6F346",
+      "data_hora": "2026-10-21T15:13:25",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-28EF89EF68",
+      "data_hora": "2026-10-21T15:24:25",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-3800C173F1",
+      "data_hora": "2026-10-21T15:29:50",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-191B6AA399",
+      "data_hora": "2026-10-21T15:59:13",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-56064057BE",
+      "data_hora": "2026-10-21T16:03:13",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-2E791FE3A0",
+      "data_hora": "2026-10-21T16:08:29",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-32F9F2D5B6",
+      "data_hora": "2026-10-21T16:08:37",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-F4A0355222",
+      "data_hora": "2026-10-21T16:10:00",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-F66164D997",
+      "data_hora": "2026-10-21T16:11:52",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-74CD378D56",
+      "data_hora": "2026-10-21T16:18:02",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-8D84D7147A",
+      "data_hora": "2026-11-05T16:07:54",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-B2968B6C41",
+      "data_hora": "2026-11-05T16:09:44",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261105160944",
+      "detalhes": "Maria José Rodrigues - R$ 2,438.40"
+    },
+    {
+      "id": "AUD-F40F205061",
+      "data_hora": "2026-11-05T16:14:36",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-416A0ED87C",
+      "data_hora": "2026-11-05T16:14:51",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-93CD41D5F2",
+      "data_hora": "2026-11-05T16:15:28",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-E4C68914FC",
+      "data_hora": "2026-11-11T10:46:07",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-FF6549FF21",
+      "data_hora": "2026-11-11T11:02:09",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-18693D4E7E",
+      "data_hora": "2026-11-11T11:23:38",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-04F72BED69",
+      "data_hora": "2026-11-11T11:24:44",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261111112444",
+      "detalhes": "Guilherme Rodrigues Pessoa - R$ 4,512.00"
+    },
+    {
+      "id": "AUD-5F5CF00850",
+      "data_hora": "2026-11-11T11:25:45",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261111112545",
+      "detalhes": "João Aguilar - R$ 520.00"
+    },
+    {
+      "id": "AUD-F2DB156C94",
+      "data_hora": "2026-11-11T11:56:53",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-B09A633E49",
+      "data_hora": "2026-11-11T11:57:29",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261111115729",
+      "detalhes": "João Aguilar - R$ 7,440.00"
+    },
+    {
+      "id": "AUD-478753FF2A",
+      "data_hora": "2026-11-11T11:58:30",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261111115830",
+      "detalhes": "João Aguilar - R$ 558.00"
+    },
+    {
+      "id": "AUD-1D250F0695",
+      "data_hora": "2026-11-11T12:02:38",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261111120238",
+      "detalhes": "João Aguilar - R$ 132.00"
+    },
+    {
+      "id": "AUD-F8A727D6FA",
+      "data_hora": "2026-11-11T12:03:27",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-72C8180872",
+      "data_hora": "2026-11-11T12:07:42",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "revisou orçamento e itens",
+      "entidade": "orçamento",
+      "entidade_id": "ORC-20261111120238",
+      "detalhes": "Revisão 1 - João Aguilar - R$ 1,320.00"
+    },
+    {
+      "id": "AUD-94BD11EE71",
+      "data_hora": "2026-11-11T12:18:34",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-7D390586B2",
+      "data_hora": "2026-11-11T12:19:45",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "0001.11.11.26",
+      "detalhes": "João Aguilar - R$ 4,200.00"
+    },
+    {
+      "id": "AUD-20E65041CB",
+      "data_hora": "2026-11-11T12:26:02",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-038C2D29A5",
+      "data_hora": "2026-11-11T12:27:18",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "0002.11.11.26",
+      "detalhes": "João Aguilar - R$ 1,120.00"
+    },
+    {
+      "id": "AUD-D5C2CAC166",
+      "data_hora": "2026-11-11T12:31:20",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "0003.11.11.26",
+      "detalhes": "João Aguilar - R$ 11,200.00"
+    },
+    {
+      "id": "AUD-3AA687804E",
+      "data_hora": "2026-11-11T12:39:21",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-DF2C92A998",
+      "data_hora": "2026-11-11T12:40:00",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "0004.11.11.26",
+      "detalhes": "João Aguilar - R$ 11,200.00"
+    },
+    {
+      "id": "AUD-F5478393F6",
+      "data_hora": "2026-11-11T12:46:11",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "0005.11.11.26",
+      "detalhes": "João Aguilar - R$ 7,968.00"
+    },
+    {
+      "id": "AUD-0D4BEA98AE",
+      "data_hora": "2026-11-11T12:50:39",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "modelo_pdf",
+      "entidade_id": "modelo",
+      "detalhes": "Modelo do PDF do orçamento"
+    },
+    {
+      "id": "AUD-9DDEA19EAC",
+      "data_hora": "2026-11-11T12:52:53",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "alterou",
+      "entidade": "modelo_pdf",
+      "entidade_id": "modelo",
+      "detalhes": "Modelo do PDF do orçamento"
+    },
+    {
+      "id": "AUD-C98265D932",
+      "data_hora": "2026-11-11T13:02:55",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-99903345ED",
+      "data_hora": "2026-11-11T13:04:38",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "material",
+      "entidade_id": "MAT-BAA8B23744",
+      "detalhes": "Rodapé 10 CM Verde ubatúba"
+    },
+    {
+      "id": "AUD-442EDB0334",
+      "data_hora": "2026-11-11T13:06:53",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "0006.11.11.26",
+      "detalhes": "João Aguilar - R$ 324.00"
+    },
+    {
+      "id": "AUD-991FF94C40",
+      "data_hora": "2026-11-11T13:12:56",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-C61AED26D2",
+      "data_hora": "2026-11-11T13:21:46",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-29AC2A65AB",
+      "data_hora": "2026-11-11T13:22:33",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "0007.11.11.26",
+      "detalhes": "João Aguilar - R$ 29,120.00"
+    },
+    {
+      "id": "AUD-3233B04250",
+      "data_hora": "2026-11-11T13:24:04",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "criou",
+      "entidade": "orçamento",
+      "entidade_id": "0008.11.11.26",
+      "detalhes": "João Aguilar - R$ 520.00"
+    },
+    {
+      "id": "AUD-3B329909E1",
+      "data_hora": "2026-11-11T13:24:49",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "arquivou orçamento",
+      "entidade": "orçamento",
+      "entidade_id": "0008.11.11.26",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-0177765D2F",
+      "data_hora": "2026-11-11T13:26:07",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-53BF3599CB",
+      "data_hora": "2026-11-11T13:29:20",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-4FED0B02DE",
+      "data_hora": "2026-11-11T13:30:00",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-7618D03A2F",
+      "data_hora": "2026-11-11T13:35:46",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-F797E3792C",
+      "data_hora": "2026-11-11T13:35:46",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-EA2E33A99C",
+      "data_hora": "2026-11-11T13:35:46",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-D05060FF78",
+      "data_hora": "2026-11-11T13:42:04",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-50CEB43CBD",
+      "data_hora": "2026-11-11T13:48:45",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-81E5ED6E23",
+      "data_hora": "2026-11-11T13:50:49",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "saiu",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-21797D54A1",
+      "data_hora": "2026-11-11T13:50:59",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-1F63BE39B0",
+      "data_hora": "2026-11-11T14:20:05",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-A899464063",
+      "data_hora": "2026-11-11T14:49:45",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-95E38FE8C1",
+      "data_hora": "2026-11-27T09:28:41",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    },
+    {
+      "id": "AUD-EB46A50940",
+      "data_hora": "2026-11-27T10:33:04",
+      "usuario_id": "USR-57BCDFC94A",
+      "usuario_nome": "Administrador",
+      "acao": "entrou",
+      "entidade": "sessao",
+      "entidade_id": "USR-57BCDFC94A",
+      "detalhes": ""
+    }
+  ],
+  "modelo_pdf": {
+    "cor_principal": "#101a2b",
+    "cor_total": "#d8eaf5",
+    "titulo_orcamento": "ORÇAMENTO",
+    "titulo_pedido": "PEDIDO",
+    "texto_liberacao": "Em até 6x sem juros.",
+    "condicoes": [
+      "1 - Mármores e granitos estão sujeitos a variações naturais de tonalidades e cores.",
+      "2 - Pedidos mediante projeto podem sofrer alterações após medição local.",
+      "3 - A conferência deve ser feita no ato da entrega; reclamações posteriores não serão aceitas.",
+      "4 - A instalação dos materiais não está inclusa, sendo responsabilidade do comprador.",
+      "5 - A marmoraria não faz rejuntamento.",
+      "6 - Algumas peças deverão ser ajustadas no local pelo responsável instalador.",
+      "7 - A empresa não trabalha com instalação de pedras.",
+      "8 - Frete por conta do cliente - não incluso no valor da marmoraria.",
+      "9 - Não nos responsabilizamos por má instalação."
+    ],
+    "acessorios": [
+      "Cubas, lixeiras, calha úmida, torre de tomadas e manual de churrasqueiras ou cooktop.",
+      "Porcelanatos deverão ser entregues na marmoraria pelo cliente ou responsável pela obra."
+    ],
+    "obra": [
+      "Caso a obra necessite de acabamento em esquadria na bancada ou fechamentos, deverá ser agendado."
+    ],
+    "confirmacao": "Confirmo que li as informações acima e concordo com a execução do serviço.",
+    "empresa": "CATALÃO MÁRMORES E GRANITOS",
+    "cnpj": "CNPJ: 10.446.296/0001-22"
+  }
+}
