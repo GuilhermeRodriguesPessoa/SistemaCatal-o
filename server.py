@@ -18,8 +18,9 @@ from plano_corte import conteudo_plano_corte, ICONE_PLANO, gerar_pdf_plano
 import firebase_admin
 from firebase_admin import credentials, firestore
 import base64
-
-import base64
+print("DEBUG: O SERVIDOR ESTÁ INICIANDO!")
+db = None
+print("DEBUG: VARIÁVEL DB CRIADA!")
 
 # --- CONEXÃO COM O FIREBASE ---
 db = None
@@ -2655,7 +2656,8 @@ class MeuServidor(SimpleHTTPRequestHandler):
 
         self.send_response(404)
         self.end_headers()
-
+        
+print("DEBUG: CHEGOU NA PARTE DE INICIAR A PORTA 5000!")
 if __name__ == '__main__':
     endereco = ('0.0.0.0', 5000)
     servidor = ThreadingHTTPServer(endereco, MeuServidor)
