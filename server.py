@@ -23,18 +23,22 @@ PDF_DIR = os.path.join(BASE_DIR, "PDF_Orcamentos")
 LOGO_FILE = os.path.join(BASE_DIR, "logo.png")
 os.makedirs(PDF_DIR, exist_ok=True)
 
-# --- CONEXÃO COM O FIREBASE (LENDO O ARQUIVO JSON) ---
+import base64
+
+# --- CONEXÃO COM O FIREBASE (VIA BASE64) ---
 db = None
 try:
-    caminho_chave = os.path.join(BASE_DIR, 'firebase-key.json')
-    if os.path.exists(caminho_chave):
-        cred = credentials.Certificate(caminho_chave)
+    credenciais_base64 = os.environ.get('FIREBASE_CREDENTIALS_B64')
+    if credenciais_base64:
+        # Decodifica o Base64 de volta para JSON
+        json_str = base64.b64decode(credenciais_base64).decode('utf-8')
+        cred = credentials.Certificate(json.loads(json_str))
         if not firebase_admin._apps:
             firebase_admin.initialize_app(cred)
         db = firestore.client()
-        print("Conectado ao Firebase com sucesso via arquivo!")
+        print("Conectado ao Firebase via Base64!")
     else:
-        print("ERRO: Arquivo firebase-key.json não encontrado.")
+        print("ERRO: Variável FIREBASE_CREDENTIALS_B64 não encontrada.")
 except Exception as e:
     print(f"ERRO AO CONECTAR NO FIREBASE: {e}")
 
